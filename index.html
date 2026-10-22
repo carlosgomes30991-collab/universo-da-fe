@@ -431,6 +431,7 @@ function addSection(parent,title,value){
   parent.append(h,p);
 }
 
+
 function openReligion(r){
   document.getElementById("home").style.display="none";
   detail.style.display="block";
@@ -459,8 +460,16 @@ function openReligion(r){
   title.textContent="📚 Biblioteca Sagrada";
   detail.appendChild(title);
 
+  if(r.n==="Cristianismo"){
+    const read=document.createElement("button");
+    read.className="action";
+    read.textContent="📖 Abrir Bíblia completa";
+    read.onclick=()=>openBibleReader("Gen");
+    detail.appendChild(read);
+  }
+
   const intro=document.createElement("p");
-  intro.textContent="Explore obras importantes desta tradição. Pesquise pelo nome do livro ou por um assunto.";
+  intro.textContent="Toque em um livro bíblico para começar a leitura. Os capítulos serão carregados pela internet.";
   detail.appendChild(intro);
 
   const filter=document.createElement("input");
@@ -476,34 +485,59 @@ function openReligion(r){
   function renderBooks(){
     const term=filter.value.trim().toLocaleLowerCase("pt-BR");
     list.innerHTML="";
+
     r.books.filter(book=>
-      (book[0]+" "+book[1]+" "+book[2]).toLocaleLowerCase("pt-BR").includes(term)
+      (book[0]+" "+book[1]+" "+book[2])
+        .toLocaleLowerCase("pt-BR").includes(term)
     ).forEach(book=>{
       const card=document.createElement("article");
       card.className="book";
+
       const kind=document.createElement("div");
       kind.className="kind";
       kind.textContent=book[2];
+
       const name=document.createElement("h4");
       name.textContent="📖 "+book[0];
+
       const desc=document.createElement("p");
       desc.textContent=book[1];
+
       card.append(kind,name,desc);
+
+      if(r.n==="Cristianismo"){
+        const osis=bibleBookMap[book[0]];
+        if(osis || book[0]==="Bíblia Sagrada"){
+          card.style.cursor="pointer";
+          card.tabIndex=0;
+          card.setAttribute("role","button");
+          card.onclick=()=>{
+            openBibleReader(osis || "Gen");
+          };
+          card.onkeydown=e=>{
+            if(e.key==="Enter" || e.key===" "){
+              e.preventDefault();
+              card.click();
+            }
+          };
+        }
+      }
+
       list.appendChild(card);
     });
+
     if(!list.children.length){
-      const empty=document.createElement("p");
-      empty.textContent="Nenhum livro encontrado. Tente outra palavra.";
-      list.appendChild(empty);
+      list.textContent="Nenhum livro encontrado.";
     }
   }
+
   filter.addEventListener("input",renderBooks);
   renderBooks();
 
   const note=document.createElement("p");
   note.className="muted";
   note.style.fontSize="13px";
-  note.textContent="Esta biblioteca apresenta resumos educativos, não o texto integral das obras. O número de livros, as traduções e as interpretações podem variar. Para leitura integral, procure edições oficiais, traduções autorizadas ou versões em domínio público.";
+  note.textContent="A leitura integral da Bíblia utiliza a tradução Almeida 1819, disponibilizada pelo projeto bible-data. É necessária conexão com a internet.";
   detail.appendChild(note);
 
   const back=document.createElement("button");
@@ -515,6 +549,226 @@ function openReligion(r){
     window.scrollTo(0,0);
   };
   detail.appendChild(back);
+  window.scrollTo(0,0);
+}
+
+const bibleBooks=[
+ ["Gen","Gênesis"],["Exod","Êxodo"],["Lev","Levítico"],
+ ["Num","Números"],["Deut","Deuteronômio"],["Josh","Josué"],
+ ["Judg","Juízes"],["Ruth","Rute"],["1Sam","1 Samuel"],
+ ["2Sam","2 Samuel"],["1Kgs","1 Reis"],["2Kgs","2 Reis"],
+ ["1Chr","1 Crônicas"],["2Chr","2 Crônicas"],["Ezra","Esdras"],
+ ["Neh","Neemias"],["Esth","Ester"],["Job","Jó"],
+ ["Ps","Salmos"],["Prov","Provérbios"],["Eccl","Eclesiastes"],
+ ["Song","Cântico dos Cânticos"],["Isa","Isaías"],["Jer","Jeremias"],
+ ["Lam","Lamentações"],["Ezek","Ezequiel"],["Dan","Daniel"],
+ ["Hos","Oseias"],["Joel","Joel"],["Amos","Amós"],
+ ["Obad","Obadias"],["Jonah","Jonas"],["Mic","Miqueias"],
+ ["Nah","Naum"],["Hab","Habacuque"],["Zeph","Sofonias"],
+ ["Hag","Ageu"],["Zech","Zacarias"],["Mal","Malaquias"],
+ ["Matt","Mateus"],["Mark","Marcos"],["Luke","Lucas"],
+ ["John","João"],["Acts","Atos dos Apóstolos"],
+ ["Rom","Romanos"],["1Cor","1 Coríntios"],["2Cor","2 Coríntios"],
+ ["Gal","Gálatas"],["Eph","Efésios"],["Phil","Filipenses"],
+ ["Col","Colossenses"],["1Thess","1 Tessalonicenses"],
+ ["2Thess","2 Tessalonicenses"],["1Tim","1 Timóteo"],
+ ["2Tim","2 Timóteo"],["Titus","Tito"],["Phlm","Filemom"],
+ ["Heb","Hebreus"],["Jas","Tiago"],["1Pet","1 Pedro"],
+ ["2Pet","2 Pedro"],["1John","1 João"],["2John","2 João"],
+ ["3John","3 João"],["Jude","Judas"],["Rev","Apocalipse"]
+];
+
+const bibleBookMap={
+ "Bíblia Sagrada":"Gen",
+ "Gênesis":"Gen",
+ "Êxodo":"Exod",
+ "Salmos":"Ps",
+ "Provérbios":"Prov",
+ "Isaías":"Isa",
+ "Evangelho de Mateus":"Matt",
+ "Evangelho de Marcos":"Mark",
+ "Evangelho de Lucas":"Luke",
+ "Evangelho de João":"John",
+ "Atos dos Apóstolos":"Acts",
+ "Romanos":"Rom",
+ "Apocalipse":"Rev"
+};
+
+async function openBibleReader(startBook){
+  detail.innerHTML="";
+  detail.style.display="block";
+
+  const heading=document.createElement("h2");
+  heading.textContent="📖 Leitor da Bíblia";
+  detail.appendChild(heading);
+
+  const intro=document.createElement("p");
+  intro.textContent="Almeida 1819 · Bíblia Livre";
+  detail.appendChild(intro);
+
+  const bookLabel=document.createElement("label");
+  bookLabel.textContent="Livro bíblico";
+  detail.appendChild(bookLabel);
+
+  const bookSelect=document.createElement("select");
+  bookSelect.setAttribute("aria-label","Escolher livro bíblico");
+
+  bibleBooks.forEach(([id,name])=>{
+    const option=document.createElement("option");
+    option.value=id;
+    option.textContent=name;
+    bookSelect.appendChild(option);
+  });
+  bookSelect.value=startBook;
+  detail.appendChild(bookSelect);
+
+  const chapterLabel=document.createElement("label");
+  chapterLabel.textContent="Capítulo";
+  detail.appendChild(chapterLabel);
+
+  const chapterSelect=document.createElement("select");
+  chapterSelect.setAttribute("aria-label","Escolher capítulo");
+  detail.appendChild(chapterSelect);
+
+  const status=document.createElement("p");
+  status.className="muted";
+  status.textContent="Carregando capítulo...";
+  detail.appendChild(status);
+
+  const passage=document.createElement("div");
+  passage.className="book";
+  passage.style.lineHeight="2";
+  passage.style.fontSize="17px";
+  passage.style.marginTop="15px";
+  detail.appendChild(passage);
+
+  const controls=document.createElement("div");
+  controls.style.marginTop="15px";
+
+  const previous=document.createElement("button");
+  previous.className="secondary";
+  previous.textContent="← Capítulo anterior";
+
+  const next=document.createElement("button");
+  next.className="action";
+  next.textContent="Próximo capítulo →";
+
+  controls.append(previous,next);
+  detail.appendChild(controls);
+
+  const source=document.createElement("p");
+  source.className="muted";
+  source.style.fontSize="12px";
+  source.textContent="Fonte dos textos: midvash/bible-data · Almeida 1819.";
+  detail.appendChild(source);
+
+  const back=document.createElement("button");
+  back.className="secondary";
+  back.textContent="← Voltar à biblioteca";
+  back.onclick=()=>openReligion(
+    religions.find(item=>item.n==="Cristianismo")
+  );
+  detail.appendChild(back);
+
+  let bookData=null;
+  let requestNumber=0;
+
+  async function loadBook(){
+    const currentRequest=++requestNumber;
+    passage.innerHTML="";
+    chapterSelect.innerHTML="";
+    status.textContent="Carregando livro...";
+
+    try{
+      const url=
+        "https://raw.githubusercontent.com/midvash/bible-data/main/versions/pt/almeida-livre/books/"
+        +bookSelect.value+".json";
+
+      const response=await fetch(url);
+      if(!response.ok) throw new Error("Arquivo indisponível");
+
+      const data=await response.json();
+      if(currentRequest!==requestNumber) return;
+
+      bookData=data;
+
+      data.chapters.forEach(chapter=>{
+        const option=document.createElement("option");
+        option.value=chapter.chapter;
+        option.textContent="Capítulo "+chapter.chapter;
+        chapterSelect.appendChild(option);
+      });
+
+      status.textContent=data.englishName
+        ? "Livro carregado. Escolha um capítulo para ler."
+        : "Livro carregado.";
+
+      await loadChapter();
+    }catch(error){
+      if(currentRequest!==requestNumber) return;
+      status.textContent="Não foi possível carregar este livro. Verifique sua conexão e tente novamente.";
+      passage.textContent="";
+    }
+  }
+
+  async function loadChapter(){
+    if(!bookData) return;
+
+    const chapter=bookData.chapters.find(
+      item=>String(item.chapter)===chapterSelect.value
+    );
+    if(!chapter) return;
+
+    passage.innerHTML="";
+    const chapterTitle=document.createElement("h3");
+    chapterTitle.textContent=
+      bibleBooks.find(item=>item[0]===bookSelect.value)[1]
+      +" "+chapter.chapter;
+    passage.appendChild(chapterTitle);
+
+    chapter.verses.forEach(verse=>{
+      const line=document.createElement("p");
+      line.style.margin="0 0 12px";
+
+      const number=document.createElement("strong");
+      number.style.color="var(--gold)";
+      number.textContent=verse.number+" ";
+
+      const text=document.createElement("span");
+      text.textContent=verse.text;
+
+      line.append(number,text);
+      passage.appendChild(line);
+    });
+
+    status.textContent=
+      chapter.verses.length+" versículos carregados.";
+
+    previous.disabled=
+      Number(chapterSelect.value)<=1;
+
+    next.disabled=
+      Number(chapterSelect.value)>=bookData.chapters.length;
+  }
+
+  bookSelect.addEventListener("change",loadBook);
+  chapterSelect.addEventListener("change",loadChapter);
+
+  previous.onclick=()=>{
+    if(Number(chapterSelect.value)>1){
+      chapterSelect.value=String(Number(chapterSelect.value)-1);
+      loadChapter();
+    }
+  };
+
+  next.onclick=()=>{
+    if(Number(chapterSelect.value)<bookData.chapters.length){
+      chapterSelect.value=String(Number(chapterSelect.value)+1);
+      loadChapter();
+    }
+  };
+
+  await loadBook();
   window.scrollTo(0,0);
 }
 
