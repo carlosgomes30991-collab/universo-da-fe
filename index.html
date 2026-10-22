@@ -1,1 +1,122 @@
-# universo-da-fe
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10152b">
+<title>Universo da Fé</title>
+<style>
+:root{--bg:#0b1020;--card:#171e35;--gold:#f2c66d;--text:#f7f7fb;--muted:#b7bfd3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:30px 20px;text-align:center;background:linear-gradient(140deg,#242d51,#10152b)}
+.logo{font-size:36px}
+h1{margin:8px 0;color:var(--gold);font-size:29px}
+header p{color:var(--muted);line-height:1.5}
+main{max-width:850px;margin:auto;padding:20px}
+h2{color:var(--gold)}
+.search{width:100%;padding:15px;border-radius:12px;border:1px solid #3b4567;background:#141a30;color:white;font-size:16px}
+.intro{line-height:1.7;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-top:20px}
+.card{background:var(--card);border:1px solid #303955;border-radius:15px;padding:17px;color:white;text-align:left;cursor:pointer;min-height:125px}
+.card:hover{border-color:var(--gold)}
+.emoji{font-size:29px;display:block;margin-bottom:10px}
+.card strong{font-size:16px}
+.card small{display:block;color:var(--muted);margin-top:7px}
+.panel{display:none;background:var(--card);padding:20px;border-radius:15px;margin-top:20px;line-height:1.8}
+.panel h2{margin-top:0}
+button.back{background:var(--gold);border:0;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:13px;line-height:1.7}
+.notice{font-size:13px;color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🌎✨</div>
+  <h1>Universo da Fé</h1>
+  <p>Conhecimento, respeito e diálogo entre religiões e tradições espirituais.</p>
+</header>
+
+<main>
+  <h2>Explore as religiões</h2>
+  <p class="intro">Conheça diferentes tradições, suas histórias, crenças e práticas. Cada religião possui comunidades diversas, com interpretações e costumes próprios.</p>
+
+  <input id="search" class="search" type="search" placeholder="🔎 Pesquisar uma religião..." aria-label="Pesquisar religiões">
+
+  <section id="grid" class="grid"></section>
+  <section id="detail" class="panel" aria-live="polite"></section>
+
+  <h2>Nosso propósito</h2>
+  <p class="intro">O Universo da Fé é um espaço educativo dedicado ao conhecimento religioso, à convivência pacífica e ao respeito à liberdade de crença — incluindo o direito de não seguir uma religião.</p>
+  <p class="notice">As descrições são introdutórias. Para estudos aprofundados, consulte fontes históricas, acadêmicas e representantes das próprias tradições.</p>
+</main>
+
+<footer>
+  Universo da Fé · Conhecimento sem preconceito<br>
+  Respeite todas as pessoas, crenças e culturas.
+</footer>
+
+<script>
+const religions = [
+ {name:"Cristianismo",icon:"✝️",group:"Religião abraâmica",origin:"Oriente Médio",text:"Religião centrada na vida e nos ensinamentos de Jesus Cristo. A Bíblia é seu texto sagrado. Possui tradições como catolicismo, ortodoxia e protestantismo.",belief:"Muitos cristãos creem em um único Deus e na importância de Jesus para a salvação.",practice:"Orações, culto comunitário, leitura bíblica e celebrações como Natal e Páscoa."},
+ {name:"Islamismo",icon:"☪️",group:"Religião abraâmica",origin:"Península Arábica",text:"Tradição religiosa monoteísta que reconhece o Alcorão como escritura sagrada e Muhammad como profeta.",belief:"A fé islâmica afirma a existência de um único Deus, chamado Allah em árabe.",practice:"Oração, caridade, jejum durante o Ramadã e peregrinação a Meca para quem pode realizá-la."},
+ {name:"Judaísmo",icon:"✡️",group:"Religião abraâmica",origin:"Antigo Oriente Próximo",text:"Uma das tradições monoteístas mais antigas, ligada à história e à cultura do povo judeu.",belief:"Valoriza a aliança com Deus, a tradição e os ensinamentos da Torá.",practice:"Estudo religioso, orações, Shabat e celebrações como Pessach e Hanucá."},
+ {name:"Hinduísmo",icon:"🕉️",group:"Tradições indianas",origin:"Subcontinente indiano",text:"Conjunto diverso de tradições espirituais com raízes antigas na Índia.",belief:"As tradições hindus apresentam diferentes compreensões do divino, do karma, do dharma e da libertação espiritual.",practice:"Meditação, yoga em algumas tradições, devoção, peregrinações e festivais."},
+ {name:"Budismo",icon:"☸️",group:"Tradições indianas",origin:"Índia antiga",text:"Tradição baseada nos ensinamentos de Siddhartha Gautama, conhecido como Buda.",belief:"Investiga o sofrimento e caminhos para desenvolver sabedoria, ética e libertação.",practice:"Meditação, estudo, conduta ética e compaixão. As práticas variam entre escolas."},
+ {name:"Espiritismo",icon:"🕊️",group:"Tradição espiritual",origin:"França, século XIX",text:"Doutrina sistematizada por Allan Kardec, com presença expressiva no Brasil.",belief:"Defende a continuidade da vida após a morte, a evolução espiritual e a reencarnação.",practice:"Estudo, oração, caridade e atividades de assistência, conforme cada instituição."},
+ {name:"Religiões de matriz africana",icon:"🥁",group:"Tradições africanas e afro-brasileiras",origin:"África e Brasil",text:"Incluem tradições diversas, como Candomblé e Umbanda, com histórias e fundamentos próprios.",belief:"As crenças variam; podem envolver divindades, ancestrais, entidades espirituais e relações com a natureza.",practice:"Rituais, música, cantos, celebrações comunitárias e transmissão oral de conhecimentos."},
+ {name:"Sikhismo",icon:"☬",group:"Tradição indiana",origin:"Punjab, sul da Ásia",text:"Tradição fundada por Guru Nanak e desenvolvida por dez Gurus humanos.",belief:"Enfatiza um único Deus, igualdade humana, serviço e vida ética.",practice:"Oração, leitura do Guru Granth Sahib e serviço comunitário, incluindo refeições gratuitas."},
+ {name:"Fé Bahá'í",icon:"🌟",group:"Religião mundial",origin:"Pérsia, século XIX",text:"Tradição fundada por Bahá'u'lláh, que enfatiza a unidade da humanidade.",belief:"Valoriza a unidade das religiões, a igualdade entre mulheres e homens e a paz mundial.",practice:"Oração, estudo espiritual, serviço e atividades comunitárias."},
+ {name:"Taoismo",icon:"☯️",group:"Tradição chinesa",origin:"China",text:"Tradição filosófica e religiosa chinesa associada ao Tao, o caminho ou princípio fundamental da realidade.",belief:"Valoriza a harmonia com o Tao e a compreensão dos ritmos naturais.",practice:"Práticas variáveis, que podem incluir meditação, rituais e exercícios tradicionais."},
+ {name:"Xintoísmo",icon:"⛩️",group:"Tradição japonesa",origin:"Japão",text:"Tradição nativa japonesa que valoriza os kami, associados a aspectos da natureza e da vida.",belief:"Não possui uma única doutrina universal; as crenças e práticas são diversas.",practice:"Visitas a santuários, rituais de purificação e festivais."},
+ {name:"Tradições indígenas",icon:"🌿",group:"Diversas tradições",origin:"Povos do mundo",text:"Os povos indígenas possuem tradições espirituais distintas, ligadas às suas histórias, territórios e comunidades.",belief:"Não existe uma crença indígena única. Cada povo mantém conhecimentos e visões de mundo próprios.",practice:"Podem incluir narrativas orais, cerimônias, cantos e relações espirituais com o território."}
+];
+
+const grid=document.getElementById("grid");
+const detail=document.getElementById("detail");
+const search=document.getElementById("search");
+
+function render(){
+  const q=search.value.trim().toLocaleLowerCase("pt-BR");
+  const list=religions.filter(r=>
+    (r.name+" "+r.group+" "+r.origin).toLocaleLowerCase("pt-BR").includes(q)
+  );
+  grid.innerHTML="";
+  list.forEach(r=>{
+    const card=document.createElement("button");
+    card.className="card";
+    card.innerHTML=`<span class="emoji">${r.icon}</span><strong>${r.name}</strong><small>${r.group}</small>`;
+    card.onclick=()=>showDetail(r);
+    grid.appendChild(card);
+  });
+  if(!list.length) grid.innerHTML="<p>Nenhuma religião encontrada. Tente outra palavra.</p>";
+}
+
+function showDetail(r){
+  detail.style.display="block";
+  detail.innerHTML="";
+  const title=document.createElement("h2");
+  title.textContent=r.icon+" "+r.name;
+  detail.appendChild(title);
+  [["Origem",r.origin],["Sobre",r.text],["Crenças",r.belief],["Práticas e costumes",r.practice]].forEach(([label,value])=>{
+    const p=document.createElement("p");
+    const strong=document.createElement("strong");
+    strong.textContent=label+": ";
+    p.appendChild(strong);
+    p.appendChild(document.createTextNode(value));
+    detail.appendChild(p);
+  });
+  const back=document.createElement("button");
+  back.className="back";
+  back.textContent="Voltar às religiões";
+  back.onclick=()=>{detail.style.display="none";};
+  detail.appendChild(back);
+  detail.scrollIntoView({behavior:"smooth",block:"start"});
+}
+search.addEventListener("input",render);
+render();
+</script>
+</body>
+</html>
+
