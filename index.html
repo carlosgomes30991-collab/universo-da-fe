@@ -3,120 +3,552 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10152b">
 <title>Universo da Fé</title>
+
 <style>
-:root{--bg:#0b1020;--card:#171e35;--gold:#f2c66d;--text:#f7f7fb;--muted:#b7bfd3}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{padding:30px 20px;text-align:center;background:linear-gradient(140deg,#242d51,#10152b)}
-.logo{font-size:36px}
-h1{margin:8px 0;color:var(--gold);font-size:29px}
-header p{color:var(--muted);line-height:1.5}
-main{max-width:850px;margin:auto;padding:20px}
-h2{color:var(--gold)}
-.search{width:100%;padding:15px;border-radius:12px;border:1px solid #3b4567;background:#141a30;color:white;font-size:16px}
-.intro{line-height:1.7;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-top:20px}
-.card{background:var(--card);border:1px solid #303955;border-radius:15px;padding:17px;color:white;text-align:left;cursor:pointer;min-height:125px}
-.card:hover{border-color:var(--gold)}
-.emoji{font-size:29px;display:block;margin-bottom:10px}
-.card strong{font-size:16px}
-.card small{display:block;color:var(--muted);margin-top:7px}
-.panel{display:none;background:var(--card);padding:20px;border-radius:15px;margin-top:20px;line-height:1.8}
-.panel h2{margin-top:0}
-button.back{background:var(--gold);border:0;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer}
-footer{text-align:center;color:var(--muted);padding:25px;font-size:13px;line-height:1.7}
-.notice{font-size:13px;color:var(--muted);line-height:1.6}
+:root {
+  --bg:#0b1020;
+  --card:#171e35;
+  --gold:#f2c66d;
+  --text:#f7f7fb;
+  --muted:#bdc5d8;
+  --border:#303955;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  line-height:1.65;
+}
+header {
+  text-align:center;
+  padding:32px 16px;
+  background:linear-gradient(135deg,#28345c,#10152b);
+  border-bottom:1px solid #3b4567;
+}
+header .symbol { font-size:42px; }
+h1,h2,h3 { color:var(--gold); line-height:1.3; }
+header p, .muted, footer { color:var(--muted); }
+main { max-width:1000px; margin:auto; padding:18px; }
+input,select {
+  width:100%;
+  padding:14px;
+  background:var(--card);
+  color:white;
+  border:1px solid #465071;
+  border-radius:12px;
+  font-size:16px;
+  margin:5px 0;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  color:white;
+  min-width:0;
+}
+button.card {
+  text-align:left;
+  cursor:pointer;
+  min-height:125px;
+  font-size:15px;
+}
+.card:hover,button:focus-visible {
+  border-color:var(--gold);
+  outline:2px solid transparent;
+}
+.card .emoji {
+  display:block;
+  font-size:28px;
+  margin-bottom:8px;
+}
+.card small { display:block; color:var(--muted); margin-top:7px; }
+.panel {
+  display:none;
+  background:var(--card);
+  padding:20px;
+  border-radius:14px;
+  border:1px solid var(--border);
+}
+.panel p { color:#e0e5f2; }
+.action,.secondary {
+  padding:12px 16px;
+  border-radius:9px;
+  font-size:15px;
+  cursor:pointer;
+  margin:5px 5px 5px 0;
+}
+.action {
+  background:var(--gold);
+  color:#171526;
+  border:0;
+  font-weight:bold;
+}
+.secondary {
+  border:1px solid #66708e;
+  background:#202944;
+  color:white;
+}
+.tag {
+  display:inline-block;
+  border:1px solid #4c5779;
+  border-radius:20px;
+  padding:4px 10px;
+  color:var(--muted);
+  font-size:12px;
+  margin:3px;
+}
+.book {
+  background:#11182c;
+  border:1px solid #35405f;
+  border-radius:12px;
+  padding:15px;
+}
+.book h4 { color:var(--gold); margin:0 0 8px; }
+.book p { margin:0; }
+.book .kind { color:var(--muted); font-size:12px; }
+footer {
+  text-align:center;
+  padding:28px 16px;
+  font-size:13px;
+}
+.hidden { display:none !important; }
+hr { border:0; border-top:1px solid #35405f; margin:22px 0; }
 </style>
 </head>
+
 <body>
 <header>
-  <div class="logo">🌎✨</div>
+  <div class="symbol">🌎 📚</div>
   <h1>Universo da Fé</h1>
-  <p>Conhecimento, respeito e diálogo entre religiões e tradições espirituais.</p>
+  <p>Conheça religiões, histórias, escrituras e tradições espirituais.<br>Conhecimento com respeito.</p>
 </header>
 
 <main>
-  <h2>Explore as religiões</h2>
-  <p class="intro">Conheça diferentes tradições, suas histórias, crenças e práticas. Cada religião possui comunidades diversas, com interpretações e costumes próprios.</p>
+<section id="home">
+  <h2>🌍 Explore as religiões</h2>
+  <p class="muted">Escolha uma tradição para conhecer sua história, suas crenças e seus livros.</p>
+  <input id="search" type="search" placeholder="🔎 Pesquisar religião..." aria-label="Pesquisar religião">
+  <div class="grid" id="grid"></div>
 
-  <input id="search" class="search" type="search" placeholder="🔎 Pesquisar uma religião..." aria-label="Pesquisar religiões">
+  <hr>
+  <h2>⚖️ Comparar religiões</h2>
+  <p class="muted">Compare origens, textos e ensinamentos introdutórios.</p>
+  <label for="first">Primeira religião</label>
+  <select id="first"></select>
+  <label for="second">Segunda religião</label>
+  <select id="second"></select>
+  <button class="action" id="compareButton">Comparar agora</button>
+  <section class="panel" id="comparison"></section>
 
-  <section id="grid" class="grid"></section>
-  <section id="detail" class="panel" aria-live="polite"></section>
+  <hr>
+  <h2>📖 Biblioteca Sagrada</h2>
+  <p>O site apresenta resumos educativos de obras importantes. Algumas tradições possuem escrituras; outras valorizam principalmente a transmissão oral e os conhecimentos de suas comunidades.</p>
+  <p class="muted">Os resumos não substituem a leitura das obras originais nem representam todas as interpretações existentes.</p>
+</section>
 
-  <h2>Nosso propósito</h2>
-  <p class="intro">O Universo da Fé é um espaço educativo dedicado ao conhecimento religioso, à convivência pacífica e ao respeito à liberdade de crença — incluindo o direito de não seguir uma religião.</p>
-  <p class="notice">As descrições são introdutórias. Para estudos aprofundados, consulte fontes históricas, acadêmicas e representantes das próprias tradições.</p>
+<section class="panel" id="detail"></section>
 </main>
 
 <footer>
-  Universo da Fé · Conhecimento sem preconceito<br>
-  Respeite todas as pessoas, crenças e culturas.
+  Universo da Fé · Educação, diversidade e respeito.<br>
+  Conhecer uma crença não significa precisar adotá-la.
 </footer>
 
 <script>
 const religions = [
- {name:"Cristianismo",icon:"✝️",group:"Religião abraâmica",origin:"Oriente Médio",text:"Religião centrada na vida e nos ensinamentos de Jesus Cristo. A Bíblia é seu texto sagrado. Possui tradições como catolicismo, ortodoxia e protestantismo.",belief:"Muitos cristãos creem em um único Deus e na importância de Jesus para a salvação.",practice:"Orações, culto comunitário, leitura bíblica e celebrações como Natal e Páscoa."},
- {name:"Islamismo",icon:"☪️",group:"Religião abraâmica",origin:"Península Arábica",text:"Tradição religiosa monoteísta que reconhece o Alcorão como escritura sagrada e Muhammad como profeta.",belief:"A fé islâmica afirma a existência de um único Deus, chamado Allah em árabe.",practice:"Oração, caridade, jejum durante o Ramadã e peregrinação a Meca para quem pode realizá-la."},
- {name:"Judaísmo",icon:"✡️",group:"Religião abraâmica",origin:"Antigo Oriente Próximo",text:"Uma das tradições monoteístas mais antigas, ligada à história e à cultura do povo judeu.",belief:"Valoriza a aliança com Deus, a tradição e os ensinamentos da Torá.",practice:"Estudo religioso, orações, Shabat e celebrações como Pessach e Hanucá."},
- {name:"Hinduísmo",icon:"🕉️",group:"Tradições indianas",origin:"Subcontinente indiano",text:"Conjunto diverso de tradições espirituais com raízes antigas na Índia.",belief:"As tradições hindus apresentam diferentes compreensões do divino, do karma, do dharma e da libertação espiritual.",practice:"Meditação, yoga em algumas tradições, devoção, peregrinações e festivais."},
- {name:"Budismo",icon:"☸️",group:"Tradições indianas",origin:"Índia antiga",text:"Tradição baseada nos ensinamentos de Siddhartha Gautama, conhecido como Buda.",belief:"Investiga o sofrimento e caminhos para desenvolver sabedoria, ética e libertação.",practice:"Meditação, estudo, conduta ética e compaixão. As práticas variam entre escolas."},
- {name:"Espiritismo",icon:"🕊️",group:"Tradição espiritual",origin:"França, século XIX",text:"Doutrina sistematizada por Allan Kardec, com presença expressiva no Brasil.",belief:"Defende a continuidade da vida após a morte, a evolução espiritual e a reencarnação.",practice:"Estudo, oração, caridade e atividades de assistência, conforme cada instituição."},
- {name:"Religiões de matriz africana",icon:"🥁",group:"Tradições africanas e afro-brasileiras",origin:"África e Brasil",text:"Incluem tradições diversas, como Candomblé e Umbanda, com histórias e fundamentos próprios.",belief:"As crenças variam; podem envolver divindades, ancestrais, entidades espirituais e relações com a natureza.",practice:"Rituais, música, cantos, celebrações comunitárias e transmissão oral de conhecimentos."},
- {name:"Sikhismo",icon:"☬",group:"Tradição indiana",origin:"Punjab, sul da Ásia",text:"Tradição fundada por Guru Nanak e desenvolvida por dez Gurus humanos.",belief:"Enfatiza um único Deus, igualdade humana, serviço e vida ética.",practice:"Oração, leitura do Guru Granth Sahib e serviço comunitário, incluindo refeições gratuitas."},
- {name:"Fé Bahá'í",icon:"🌟",group:"Religião mundial",origin:"Pérsia, século XIX",text:"Tradição fundada por Bahá'u'lláh, que enfatiza a unidade da humanidade.",belief:"Valoriza a unidade das religiões, a igualdade entre mulheres e homens e a paz mundial.",practice:"Oração, estudo espiritual, serviço e atividades comunitárias."},
- {name:"Taoismo",icon:"☯️",group:"Tradição chinesa",origin:"China",text:"Tradição filosófica e religiosa chinesa associada ao Tao, o caminho ou princípio fundamental da realidade.",belief:"Valoriza a harmonia com o Tao e a compreensão dos ritmos naturais.",practice:"Práticas variáveis, que podem incluir meditação, rituais e exercícios tradicionais."},
- {name:"Xintoísmo",icon:"⛩️",group:"Tradição japonesa",origin:"Japão",text:"Tradição nativa japonesa que valoriza os kami, associados a aspectos da natureza e da vida.",belief:"Não possui uma única doutrina universal; as crenças e práticas são diversas.",practice:"Visitas a santuários, rituais de purificação e festivais."},
- {name:"Tradições indígenas",icon:"🌿",group:"Diversas tradições",origin:"Povos do mundo",text:"Os povos indígenas possuem tradições espirituais distintas, ligadas às suas histórias, territórios e comunidades.",belief:"Não existe uma crença indígena única. Cada povo mantém conhecimentos e visões de mundo próprios.",practice:"Podem incluir narrativas orais, cerimônias, cantos e relações espirituais com o território."}
+{
+ n:"Cristianismo",e:"✝️",g:"Religião abraâmica",
+ o:"Judeia e Oriente Médio, século I",
+ h:"Surgiu no século I a partir da vida e dos ensinamentos de Jesus de Nazaré. Expandiu-se pelo mundo e desenvolveu tradições como catolicismo, ortodoxia e protestantismo.",
+ c:"Os cristãos geralmente creem em um único Deus e consideram Jesus Cristo central para a fé. Igrejas diferentes compartilham crenças, mas também possuem diferenças teológicas e práticas.",
+ b:"A Bíblia, formada pelo Antigo e pelo Novo Testamento. O número e a organização dos livros variam entre tradições cristãs.",
+ p:"Orações, cultos, missas, leitura bíblica, batismo, ceia ou Eucaristia e ações de caridade.",
+ f:"Natal, Páscoa e Pentecostes são celebrações importantes para muitas comunidades.",
+ q:"Todas as igrejas cristãs usam exatamente a mesma Bíblia? Não. O cânone pode variar, e existem diferentes traduções.",
+ books:[
+  ["Bíblia Sagrada","Coleção de textos religiosos dividida em Antigo e Novo Testamento.","Escritura"],
+  ["Gênesis","Apresenta narrativas sobre a criação, os primeiros seres humanos e os patriarcas do povo de Israel.","Antigo Testamento"],
+  ["Êxodo","Narra a saída dos israelitas do Egito e a aliança no Sinai.","Antigo Testamento"],
+  ["Salmos","Reúne poemas, orações e cânticos de louvor, confiança e lamentação.","Antigo Testamento"],
+  ["Provérbios","Contém ensinamentos sobre sabedoria, prudência, justiça e comportamento.","Antigo Testamento"],
+  ["Isaías","Livro profético com mensagens de julgamento, esperança e restauração.","Antigo Testamento"],
+  ["Evangelho de Mateus","Apresenta ensinamentos de Jesus, incluindo o Sermão da Montanha.","Novo Testamento"],
+  ["Evangelho de Marcos","Relata ações e ensinamentos de Jesus, destacando seu ministério.","Novo Testamento"],
+  ["Evangelho de Lucas","Apresenta a vida de Jesus e enfatiza misericórdia e compaixão.","Novo Testamento"],
+  ["Evangelho de João","Reflete sobre a identidade de Jesus, a fé, o amor e a vida eterna.","Novo Testamento"],
+  ["Atos dos Apóstolos","Narra a expansão das primeiras comunidades cristãs.","Novo Testamento"],
+  ["Romanos","Carta que discute fé, graça, vida cristã e relação entre pessoas e Deus.","Novo Testamento"],
+  ["Apocalipse","Livro de visões simbólicas sobre conflito, esperança e renovação.","Novo Testamento"]
+ ]
+},
+{
+ n:"Islamismo",e:"☪️",g:"Religião abraâmica",
+ o:"Península Arábica, século VII",
+ h:"Surgiu no século VII na Península Arábica. Muhammad é reconhecido pelos muçulmanos como profeta.",
+ c:"Os muçulmanos creem em um único Deus, chamado Allah em árabe. Reconhecem Muhammad como mensageiro e respeitam profetas como Abraão, Moisés e Jesus.",
+ b:"O Alcorão é a escritura central. Os hadiths são relatos importantes sobre palavras e ações de Muhammad.",
+ p:"Os Cinco Pilares incluem declaração de fé, orações, caridade, jejum no Ramadã e peregrinação a Meca para quem pode realizá-la.",
+ f:"Ramadã, Eid al-Fitr e Eid al-Adha são datas importantes.",
+ q:"O Islã possui diferentes tradições? Sim. Entre as principais estão as tradições sunita e xiita, além de outras comunidades.",
+ books:[
+  ["Alcorão","Texto sagrado central do Islã, considerado pelos muçulmanos revelação de Deus.","Escritura"],
+  ["Al-Fatiha","Surata inicial, uma oração de louvor e pedido de orientação.","Surata"],
+  ["Al-Baqarah","A surata mais longa, com ensinamentos sobre fé, responsabilidade e vida comunitária.","Surata"],
+  ["Yusuf","Surata que apresenta a história de José, filho de Jacó, na tradição corânica.","Surata"],
+  ["Ar-Rahman","Surata que destaca a misericórdia e as dádivas de Deus.","Surata"],
+  ["Hadiths","Relatos sobre palavras, ações e aprovações do profeta Muhammad, reunidos em diferentes coleções.","Tradição"],
+  ["Sahih al-Bukhari","Uma das coleções de hadiths mais reconhecidas no Islã sunita.","Coleção de hadiths"]
+ ]
+},
+{
+ n:"Judaísmo",e:"✡️",g:"Religião abraâmica",
+ o:"Antigo Oriente Próximo",
+ h:"Antiga tradição religiosa, cultural e histórica ligada ao povo judeu e aos antigos israelitas.",
+ c:"A crença em um único Deus, a aliança, os mandamentos, a justiça e o estudo são elementos importantes. Existem diferentes correntes judaicas.",
+ b:"A Torá ocupa lugar central. O Tanakh reúne Torá, Profetas e Escritos. O Talmude é fundamental em muitas tradições rabínicas.",
+ p:"Shabat, orações, estudo, refeições comunitárias e práticas alimentares religiosas em algumas comunidades.",
+ f:"Pessach, Rosh Hashaná, Yom Kippur e Hanucá são celebrações conhecidas.",
+ q:"O judaísmo é apenas uma religião? Também possui dimensões culturais, históricas e comunitárias.",
+ books:[
+  ["Torá","Os cinco livros: Gênesis, Êxodo, Levítico, Números e Deuteronômio.","Escritura"],
+  ["Gênesis","Narrativas sobre as origens e as histórias dos patriarcas e matriarcas.","Torá"],
+  ["Êxodo","Relata a saída do Egito e a aliança no Sinai.","Torá"],
+  ["Levítico","Reúne leis e instruções religiosas para a antiga comunidade israelita.","Torá"],
+  ["Salmos","Poemas e orações que também fazem parte dos Escritos do Tanakh.","Tanakh"],
+  ["Tanakh","Bíblia hebraica, organizada em Torá, Profetas e Escritos.","Escritura"],
+  ["Talmude","Discussões rabínicas sobre lei, ética, interpretação e vida judaica.","Tradição rabínica"]
+ ]
+},
+{
+ n:"Hinduísmo",e:"🕉️",g:"Tradições indianas",
+ o:"Subcontinente indiano, raízes antigas",
+ h:"Conjunto diverso de tradições desenvolvidas ao longo de milênios. Não possui um único fundador nem uma autoridade central universal.",
+ c:"As tradições hindus têm diferentes visões sobre o divino. Conceitos importantes incluem dharma, karma, samsara e moksha.",
+ b:"Entre os textos estão os Vedas, as Upanishads, o Bhagavad Gita, o Ramayana e o Mahabharata.",
+ p:"Devoção, meditação, rituais, peregrinações, oferendas e yoga em algumas tradições.",
+ f:"Diwali é conhecido como festival das luzes; Holi, como festival das cores.",
+ q:"Todos os hindus seguem as mesmas crenças? Não. Existem muitas escolas e práticas.",
+ books:[
+  ["Rig Veda","Coleção antiga de hinos religiosos védicos.","Veda"],
+  ["Sama Veda","Texto védico associado a melodias e recitação ritual.","Veda"],
+  ["Yajur Veda","Reúne fórmulas e orientações ligadas a rituais védicos.","Veda"],
+  ["Atharva Veda","Coleção de hinos e fórmulas relacionados a diferentes aspectos da vida.","Veda"],
+  ["Upanishads","Textos filosóficos sobre realidade, conhecimento e natureza do ser.","Filosofia"],
+  ["Bhagavad Gita","Diálogo entre Krishna e Arjuna sobre dever, ação, conhecimento e devoção.","Épico religioso"],
+  ["Ramayana","Épico que narra a história de Rama, Sita e seus aliados.","Épico"],
+  ["Mahabharata","Grande épico indiano sobre famílias rivais, dever e escolhas morais.","Épico"]
+ ]
+},
+{
+ n:"Budismo",e:"☸️",g:"Tradições indianas",
+ o:"Índia antiga, por volta do século V a.C.",
+ h:"Surgiu na Índia antiga a partir dos ensinamentos de Siddhartha Gautama, conhecido como Buda. Desenvolveu tradições como Theravada, Mahayana e Vajrayana.",
+ c:"As Quatro Nobres Verdades investigam o sofrimento e suas causas. O Nobre Caminho Óctuplo apresenta práticas éticas, meditativas e de sabedoria.",
+ b:"Os textos variam por tradição. O Cânone Páli é importante no Theravada; diversos sutras são centrais no Mahayana.",
+ p:"Meditação, estudo, conduta ética, atenção plena, generosidade e cânticos, conforme a escola.",
+ f:"Vesak é uma celebração importante em muitas comunidades.",
+ q:"O budismo tem uma única escritura? Não. As coleções variam entre tradições.",
+ books:[
+  ["Cânone Páli (Tipitaka)","Coleção central da tradição Theravada, com ensinamentos, regras monásticas e análises.","Coleção de textos"],
+  ["Dhammapada","Versos sobre ética, mente, sabedoria e libertação.","Ensinamentos"],
+  ["Sutra do Coração","Texto Mahayana que aborda a vacuidade e a sabedoria.","Sutra"],
+  ["Sutra do Lótus","Texto importante em várias escolas Mahayana.","Sutra"],
+  ["Sutra do Diamante","Texto Mahayana que explora a impermanência das concepções e a sabedoria.","Sutra"],
+  ["Bardo Thodol","Texto tibetano associado a ensinamentos sobre morte e estados intermediários.","Tradição tibetana"]
+ ]
+},
+{
+ n:"Espiritismo",e:"🕊️",g:"Doutrina espiritual",
+ o:"França, século XIX",
+ h:"Foi sistematizado por Allan Kardec na França no século XIX e ganhou grande presença no Brasil.",
+ c:"Segundo a doutrina, existem Deus, a imortalidade do espírito, a reencarnação, a evolução espiritual e a possibilidade de comunicação entre espíritos e pessoas vivas.",
+ b:"Entre as obras centrais estão O Livro dos Espíritos, O Livro dos Médiuns e O Evangelho segundo o Espiritismo.",
+ p:"Estudo, oração, reuniões, assistência social e, em alguns centros, atividades mediúnicas.",
+ f:"Não existe calendário universal de festas para todos os centros.",
+ q:"Espiritismo e Umbanda são iguais? Não. São tradições distintas.",
+ books:[
+  ["O Livro dos Espíritos","Perguntas e respostas sobre Deus, espírito, vida após a morte e evolução espiritual.","Allan Kardec"],
+  ["O Livro dos Médiuns","Aborda a mediunidade segundo a doutrina espírita.","Allan Kardec"],
+  ["O Evangelho segundo o Espiritismo","Apresenta interpretações espíritas de ensinamentos morais atribuídos a Jesus.","Allan Kardec"],
+  ["O Céu e o Inferno","Discute justiça divina e vida espiritual segundo a doutrina.","Allan Kardec"],
+  ["A Gênese","Trata de criação, milagres e fenômenos considerados espirituais na obra.","Allan Kardec"]
+ ]
+},
+{
+ n:"Umbanda",e:"🌿",g:"Religião afro-brasileira",
+ o:"Brasil, início do século XX",
+ h:"Religião brasileira que reúne, de formas diversas, influências africanas, indígenas, espíritas e cristãs.",
+ c:"Muitas casas reconhecem um Deus supremo e trabalham com Orixás e entidades espirituais. Fundamentos variam entre terreiros.",
+ b:"Não existe um único livro sagrado universal. A oralidade, os ensinamentos e a experiência ritual são fundamentais.",
+ p:"Giras, cantos, atendimento espiritual e ações de caridade podem fazer parte das práticas.",
+ f:"Celebrações e homenagens variam conforme a casa e a tradição.",
+ q:"Todos os terreiros são iguais? Não. Existem diversas vertentes.",
+ books:[
+  ["Tradição oral","Ensinamentos transmitidos por dirigentes, guias religiosos e praticantes.","Conhecimento comunitário"],
+  ["Pontos cantados","Cantos religiosos praticados conforme a tradição de cada comunidade.","Cantos"],
+  ["Livros sobre Umbanda","Obras de diferentes autores explicam vertentes específicas, sem representar necessariamente todas as casas.","Leituras complementares"],
+  ["Fundamentos do terreiro","Cada comunidade possui práticas e ensinamentos próprios, alguns reservados aos seus integrantes.","Tradição"]
+ ]
+},
+{
+ n:"Candomblé",e:"🥁",g:"Religião afro-brasileira",
+ o:"Brasil, com raízes em tradições africanas",
+ h:"Formou-se no Brasil a partir de tradições religiosas africanas preservadas e transformadas por povos africanos e seus descendentes.",
+ c:"As comunidades podem cultuar Orixás, Voduns ou Inkices, conforme sua tradição. Fundamentos variam entre nações e casas.",
+ b:"A transmissão oral, a iniciação e os ensinamentos dos mais velhos são fundamentais. Não existe um livro universal para todas as casas.",
+ p:"Cerimônias, cantos, toques de tambor e danças conforme os fundamentos da comunidade.",
+ f:"As celebrações variam por casa, nação e calendário religioso.",
+ q:"Umbanda e Candomblé são iguais? Não. Possuem histórias e fundamentos próprios.",
+ books:[
+  ["Tradição oral","Conhecimentos transmitidos entre gerações por pessoas mais velhas e iniciadas.","Conhecimento comunitário"],
+  ["Cantos e narrativas tradicionais","Preservam memórias e ensinamentos conforme cada comunidade.","Tradição"],
+  ["Estudos sobre Orixás, Voduns e Inkices","Livros e pesquisas podem apresentar essas tradições, que não são idênticas entre si.","Leituras complementares"],
+  ["Fundamentos de cada casa","Não há um único livro que represente todas as casas. Alguns conhecimentos são reservados.","Tradição"]
+ ]
+},
+{
+ n:"Sikhismo",e:"☬",g:"Tradição indiana",
+ o:"Punjab, século XV",
+ h:"Foi fundado por Guru Nanak e desenvolvido por dez Gurus humanos na região do Punjab.",
+ c:"Ensina a existência de um único Deus, a igualdade, a honestidade, a lembrança de Deus e o serviço ao próximo.",
+ b:"O Guru Granth Sahib é a escritura central e possui autoridade espiritual na comunidade sikh.",
+ p:"Orações, canto de hinos, estudo e serviço comunitário. O langar oferece refeições gratuitas.",
+ f:"Vaisakhi é uma data importante, associada à formação da Khalsa.",
+ q:"O que é um gurdwara? É um local de reunião e culto da comunidade sikh.",
+ books:[
+  ["Guru Granth Sahib","Escritura central do Sikhismo e autoridade espiritual da comunidade.","Escritura"],
+  ["Japji Sahib","Composição de Guru Nanak recitada diariamente por muitos sikhs.","Oração"],
+  ["Dasam Granth","Coleção associada a Guru Gobind Singh; seu status e uso variam entre comunidades.","Coleção de textos"]
+ ]
+},
+{
+ n:"Fé Bahá'í",e:"🌟",g:"Religião mundial",
+ o:"Pérsia, século XIX",
+ h:"Surgiu na Pérsia no século XIX, com os ensinamentos de Bahá'u'lláh.",
+ c:"Enfatiza a unidade da humanidade, a unidade de Deus, a harmonia entre religião e ciência e a igualdade entre mulheres e homens.",
+ b:"Os escritos de Bahá'u'lláh e de outras figuras centrais são referências fundamentais.",
+ p:"Oração, estudo, serviço comunitário e reuniões de reflexão.",
+ f:"Naw-Rúz marca o Ano-Novo bahá'í.",
+ q:"Qual é uma ideia central da Fé Bahá'í? A unidade da humanidade.",
+ books:[
+  ["Kitáb-i-Aqdas","Livro de leis e orientações religiosas de Bahá'u'lláh.","Escritura"],
+  ["Kitáb-i-Íqán","Explora a revelação religiosa e a interpretação das escrituras.","Escritura"],
+  ["Palavras Ocultas","Coleção de breves ensinamentos espirituais e éticos.","Ensinamentos"],
+  ["Os Sete Vales","Obra simbólica sobre uma jornada espiritual.","Obra espiritual"]
+ ]
+},
+{
+ n:"Taoismo",e:"☯️",g:"Tradição chinesa",
+ o:"China antiga",
+ h:"Tradição filosófica e religiosa chinesa associada ao Tao, entendido como caminho ou princípio fundamental da realidade.",
+ c:"Muitas vertentes valorizam harmonia, naturalidade e equilíbrio. As interpretações variam entre tradições filosóficas e religiosas.",
+ b:"O Tao Te Ching e o Zhuangzi são textos importantes.",
+ p:"Conforme a escola, pode incluir meditação, rituais, práticas corporais e celebrações em templos.",
+ f:"As celebrações variam por comunidade e calendário tradicional chinês.",
+ q:"Taoismo é apenas filosofia? Existem vertentes filosóficas e religiosas.",
+ books:[
+  ["Tao Te Ching","Texto clássico associado a Laozi, sobre o Tao, simplicidade e harmonia.","Texto clássico"],
+  ["Zhuangzi","Histórias e reflexões sobre perspectiva, liberdade e natureza.","Texto filosófico"],
+  ["Cânone Taoista (Daozang)","Grande coleção de textos religiosos e filosóficos de diferentes épocas.","Coleção de textos"]
+ ]
+},
+{
+ n:"Xintoísmo",e:"⛩️",g:"Tradição japonesa",
+ o:"Japão, raízes antigas",
+ h:"Tradição nativa japonesa que se desenvolveu ao longo de muitos séculos, sem um único fundador.",
+ c:"Valoriza os kami, presenças ou seres sagrados associados à natureza, lugares, ancestrais e tradições japonesas.",
+ b:"Não há um único livro sagrado universal. Kojiki e Nihon Shoki preservam narrativas importantes.",
+ p:"Visitas a santuários, rituais de purificação, oferendas e festivais comunitários.",
+ f:"Matsuri são festivais locais; o Ano-Novo é um período importante para visitas a santuários.",
+ q:"O que é um kami? Uma categoria complexa de presença ou ser sagrado nas tradições xintoístas.",
+ books:[
+  ["Kojiki","Texto antigo japonês com narrativas sobre divindades e origens tradicionais do Japão.","Crônica"],
+  ["Nihon Shoki","Crônica que reúne narrativas históricas e mitológicas japonesas.","Crônica"],
+  ["Norito","Orações rituais usadas em cerimônias xintoístas.","Orações"]
+ ]
+},
+{
+ n:"Tradições indígenas",e:"🪶",g:"Muitas tradições",
+ o:"Povos indígenas do mundo",
+ h:"Os povos indígenas possuem tradições espirituais diversas, transmitidas entre gerações e relacionadas às suas histórias, territórios e comunidades.",
+ c:"Não existe uma crença indígena única. Cada povo tem suas próprias línguas, cosmologias e conhecimentos.",
+ b:"A oralidade, as narrativas, os cantos e os conhecimentos comunitários são fundamentais em muitas tradições.",
+ p:"As práticas variam amplamente e podem envolver cerimônias, cantos, narrativas e relações espirituais com o território.",
+ f:"Celebrações e rituais são específicos de cada povo e comunidade.",
+ q:"Existe uma religião indígena universal? Não. Há muitos povos com tradições próprias.",
+ books:[
+  ["Narrativas orais","Histórias transmitidas entre gerações que preservam memórias e conhecimentos de cada povo.","Tradição oral"],
+  ["Cantos tradicionais","Podem transmitir conhecimentos, histórias e relações com o território.","Cantos"],
+  ["Livros de autoria indígena","Obras escritas por autores indígenas apresentam perspectivas específicas de seus povos.","Leitura complementar"],
+  ["Conhecimentos comunitários","Alguns conhecimentos são reservados e devem ser abordados com respeito à comunidade de origem.","Tradição"]
+ ]
+}
 ];
 
 const grid=document.getElementById("grid");
-const detail=document.getElementById("detail");
 const search=document.getElementById("search");
+const detail=document.getElementById("detail");
 
 function render(){
   const q=search.value.trim().toLocaleLowerCase("pt-BR");
-  const list=religions.filter(r=>
-    (r.name+" "+r.group+" "+r.origin).toLocaleLowerCase("pt-BR").includes(q)
-  );
   grid.innerHTML="";
-  list.forEach(r=>{
-    const card=document.createElement("button");
-    card.className="card";
-    card.innerHTML=`<span class="emoji">${r.icon}</span><strong>${r.name}</strong><small>${r.group}</small>`;
-    card.onclick=()=>showDetail(r);
-    grid.appendChild(card);
+  religions.filter(r=>
+    (r.n+" "+r.g+" "+r.o+" "+r.b).toLocaleLowerCase("pt-BR").includes(q)
+  ).forEach(r=>{
+    const b=document.createElement("button");
+    b.className="card";
+    const icon=document.createElement("span");
+    icon.className="emoji";
+    icon.textContent=r.e;
+    const name=document.createElement("strong");
+    name.textContent=r.n;
+    const small=document.createElement("small");
+    small.textContent=r.g;
+    b.append(icon,name,small);
+    b.onclick=()=>openReligion(r);
+    grid.appendChild(b);
   });
-  if(!list.length) grid.innerHTML="<p>Nenhuma religião encontrada. Tente outra palavra.</p>";
+  if(!grid.children.length) grid.textContent="Nenhuma religião encontrada.";
 }
 
-function showDetail(r){
+function addSection(parent,title,value){
+  const h=document.createElement("h3");
+  h.textContent=title;
+  const p=document.createElement("p");
+  p.textContent=value;
+  parent.append(h,p);
+}
+
+function openReligion(r){
+  document.getElementById("home").style.display="none";
   detail.style.display="block";
   detail.innerHTML="";
-  const title=document.createElement("h2");
-  title.textContent=r.icon+" "+r.name;
+
+  const h=document.createElement("h2");
+  h.textContent=r.e+" "+r.n;
+  detail.appendChild(h);
+
+  const tag=document.createElement("span");
+  tag.className="tag";
+  tag.textContent=r.g;
+  detail.appendChild(tag);
+
+  addSection(detail,"📜 Origem e história",r.h);
+  addSection(detail,"✨ Crenças e ensinamentos",r.c);
+  addSection(detail,"📖 Textos sagrados",r.b);
+  addSection(detail,"🙏 Práticas religiosas",r.p);
+  addSection(detail,"🎉 Festividades",r.f);
+  addSection(detail,"❓ Pergunta frequente",r.q);
+
+  const hr=document.createElement("hr");
+  detail.appendChild(hr);
+
+  const title=document.createElement("h3");
+  title.textContent="📚 Biblioteca Sagrada";
   detail.appendChild(title);
-  [["Origem",r.origin],["Sobre",r.text],["Crenças",r.belief],["Práticas e costumes",r.practice]].forEach(([label,value])=>{
-    const p=document.createElement("p");
-    const strong=document.createElement("strong");
-    strong.textContent=label+": ";
-    p.appendChild(strong);
-    p.appendChild(document.createTextNode(value));
-    detail.appendChild(p);
-  });
+
+  const intro=document.createElement("p");
+  intro.textContent="Explore obras importantes desta tradição. Pesquise pelo nome do livro ou por um assunto.";
+  detail.appendChild(intro);
+
+  const filter=document.createElement("input");
+  filter.type="search";
+  filter.placeholder="🔎 Pesquisar livros...";
+  filter.setAttribute("aria-label","Pesquisar livros");
+  detail.appendChild(filter);
+
+  const list=document.createElement("div");
+  list.className="grid";
+  detail.appendChild(list);
+
+  function renderBooks(){
+    const term=filter.value.trim().toLocaleLowerCase("pt-BR");
+    list.innerHTML="";
+    r.books.filter(book=>
+      (book[0]+" "+book[1]+" "+book[2]).toLocaleLowerCase("pt-BR").includes(term)
+    ).forEach(book=>{
+      const card=document.createElement("article");
+      card.className="book";
+      const kind=document.createElement("div");
+      kind.className="kind";
+      kind.textContent=book[2];
+      const name=document.createElement("h4");
+      name.textContent="📖 "+book[0];
+      const desc=document.createElement("p");
+      desc.textContent=book[1];
+      card.append(kind,name,desc);
+      list.appendChild(card);
+    });
+    if(!list.children.length){
+      const empty=document.createElement("p");
+      empty.textContent="Nenhum livro encontrado. Tente outra palavra.";
+      list.appendChild(empty);
+    }
+  }
+  filter.addEventListener("input",renderBooks);
+  renderBooks();
+
+  const note=document.createElement("p");
+  note.className="muted";
+  note.style.fontSize="13px";
+  note.textContent="Esta biblioteca apresenta resumos educativos, não o texto integral das obras. O número de livros, as traduções e as interpretações podem variar. Para leitura integral, procure edições oficiais, traduções autorizadas ou versões em domínio público.";
+  detail.appendChild(note);
+
   const back=document.createElement("button");
-  back.className="back";
-  back.textContent="Voltar às religiões";
-  back.onclick=()=>{detail.style.display="none";};
+  back.className="action";
+  back.textContent="← Voltar às religiões";
+  back.onclick=()=>{
+    detail.style.display="none";
+    document.getElementById("home").style.display="block";
+    window.scrollTo(0,0);
+  };
   detail.appendChild(back);
-  detail.scrollIntoView({behavior:"smooth",block:"start"});
+  window.scrollTo(0,0);
 }
+
+function fillSelect(id){
+  const s=document.getElementById(id);
+  religions.forEach((r,i)=>{
+    const o=document.createElement("option");
+    o.value=i;
+    o.textContent=r.n;
+    s.appendChild(o);
+  });
+}
+
+function compare(){
+  const a=religions[Number(document.getElementById("first").value)];
+  const b=religions[Number(document.getElementById("second").value)];
+  const box=document.getElementById("comparison");
+  box.innerHTML="";
+  box.style.display="block";
+  const h=document.createElement("h3");
+  h.textContent=a.n+" × "+b.n;
+  box.appendChild(h);
+  addSection(box,"Origem",a.n+": "+a.o+"\n"+b.n+": "+b.o);
+  addSection(box,"Textos sagrados",a.n+": "+a.b+"\n"+b.n+": "+b.b);
+  addSection(box,"Crenças",a.n+": "+a.c+"\n"+b.n+": "+b.c);
+  box.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+fillSelect("first");
+fillSelect("second");
+document.getElementById("second").selectedIndex=1;
+document.getElementById("compareButton").addEventListener("click",compare);
 search.addEventListener("input",render);
 render();
 </script>
 </body>
 </html>
-
