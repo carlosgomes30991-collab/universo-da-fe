@@ -214,6 +214,15 @@ async function openQuranReader(startSura = 1) {
   const heading = document.createElement("h2");
   heading.textContent = "📖 Leitor do Alcorão";
   detail.appendChild(heading);
+if (/islam|islã/i.test(r.n || "")) {
+  const quranButton = document.createElement("button");
+  quranButton.className = "action";
+  quranButton.textContent = "📖 Ler o Alcorão";
+  quranButton.style.margin = "10px 0";
+  quranButton.onclick = () => openQuranReader(1);
+  detail.appendChild(quranButton);
+}
+
 
   const intro = document.createElement("p");
   intro.textContent =
