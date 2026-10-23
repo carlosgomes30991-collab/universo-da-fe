@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,128 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10152b">
 <title>Universo da Fé</title>
-
 <style>
-:root {
-  --bg:#0b1020;
-  --card:#171e35;
-  --gold:#f2c66d;
-  --text:#f7f7fb;
-  --muted:#bdc5d8;
-  --border:#303955;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  line-height:1.65;
-}
-header {
-  text-align:center;
-  padding:32px 16px;
-  background:linear-gradient(135deg,#28345c,#10152b);
-  border-bottom:1px solid #3b4567;
-}
-header .symbol { font-size:42px; }
-h1,h2,h3 { color:var(--gold); line-height:1.3; }
-header p, .muted, footer { color:var(--muted); }
-main { max-width:1000px; margin:auto; padding:18px; }
-input,select {
-  width:100%;
-  padding:14px;
-  background:var(--card);
-  color:white;
-  border:1px solid #465071;
-  border-radius:12px;
-  font-size:16px;
-  margin:5px 0;
-}
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:12px;
-  margin:18px 0;
-}
-.card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
-  color:white;
-  min-width:0;
-}
-button.card {
-  text-align:left;
-  cursor:pointer;
-  min-height:125px;
-  font-size:15px;
-}
-.card:hover,button:focus-visible {
-  border-color:var(--gold);
-  outline:2px solid transparent;
-}
-.card .emoji {
-  display:block;
-  font-size:28px;
-  margin-bottom:8px;
-}
-.card small { display:block; color:var(--muted); margin-top:7px; }
-.panel {
-  display:none;
-  background:var(--card);
-  padding:20px;
-  border-radius:14px;
-  border:1px solid var(--border);
-}
-.panel p { color:#e0e5f2; }
-.action,.secondary {
-  padding:12px 16px;
-  border-radius:9px;
-  font-size:15px;
-  cursor:pointer;
-  margin:5px 5px 5px 0;
-}
-.action {
-  background:var(--gold);
-  color:#171526;
-  border:0;
-  font-weight:bold;
-}
-.secondary {
-  border:1px solid #66708e;
-  background:#202944;
-  color:white;
-}
-.tag {
-  display:inline-block;
-  border:1px solid #4c5779;
-  border-radius:20px;
-  padding:4px 10px;
-  color:var(--muted);
-  font-size:12px;
-  margin:3px;
-}
-.book {
-  background:#11182c;
-  border:1px solid #35405f;
-  border-radius:12px;
-  padding:15px;
-}
-.book h4 { color:var(--gold); margin:0 0 8px; }
-.book p { margin:0; }
-.book .kind { color:var(--muted); font-size:12px; }
-footer {
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-}
-.hidden { display:none !important; }
-hr { border:0; border-top:1px solid #35405f; margin:22px 0; }
+:root{--bg:#0b1020;--card:#171e35;--gold:#f2c66d;--text:#f7f7fb;--muted:#bdc5d8;--border:#303955}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;line-height:1.65}
+header{text-align:center;padding:32px 16px;background:linear-gradient(135deg,#28345c,#10152b);border-bottom:1px solid #3b4567}
+header .symbol{font-size:42px}
+h1,h2,h3{color:var(--gold);line-height:1.3}
+header p,.muted,footer{color:var(--muted)}
+main{max-width:1000px;margin:auto;padding:18px}
+input,select{width:100%;padding:14px;background:var(--card);color:white;border:1px solid #465071;border-radius:12px;font-size:16px;margin:5px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;color:white;min-width:0}
+button.card{text-align:left;cursor:pointer;min-height:125px;font-size:15px}
+.card:hover,button:focus-visible{border-color:var(--gold);outline:2px solid transparent}
+.card .emoji{display:block;font-size:28px;margin-bottom:8px}
+.card small{display:block;color:var(--muted);margin-top:7px}
+.panel{display:none;background:var(--card);padding:20px;border-radius:14px;border:1px solid var(--border)}
+.panel p{color:#e0e5f2;white-space:pre-line}
+.action,.secondary{padding:12px 16px;border-radius:9px;font-size:15px;cursor:pointer;margin:5px 5px 5px 0}
+.action{background:var(--gold);color:#171526;border:0;font-weight:bold}
+.secondary{border:1px solid #66708e;background:#202944;color:white}
+button:disabled{opacity:.5;cursor:not-allowed}
+.tag{display:inline-block;border:1px solid #4c5779;border-radius:20px;padding:4px 10px;color:var(--muted);font-size:12px;margin:3px}
+.book{background:#11182c;border:1px solid #35405f;border-radius:12px;padding:15px}
+.book h4{color:var(--gold);margin:0 0 8px}
+.book p{margin:0}
+.book .kind{color:var(--muted);font-size:12px}
+footer{text-align:center;padding:28px 16px;font-size:13px}
+hr{border:0;border-top:1px solid #35405f;margin:22px 0}
 </style>
 </head>
-
 <body>
 <header>
   <div class="symbol">🌎 📚</div>
@@ -165,209 +73,6 @@ hr { border:0; border-top:1px solid #35405f; margin:22px 0; }
   Universo da Fé · Educação, diversidade e respeito.<br>
   Conhecer uma crença não significa precisar adotá-la.
 </footer>
-
-async function openQuranReader(startSura = 1) {
-  detail.innerHTML = "";
-  detail.style.display = "block";
-
-  const surahs = [
-    "Al-Fatiha", "Al-Baqarah", "Al-Imran",
-    "An-Nisa", "Al-Maidah", "Al-Anam",
-    "Al-Araf", "Al-Anfal", "At-Tawbah",
-    "Yunus", "Hud", "Yusuf", "Ar-Rad",
-    "Ibrahim", "Al-Hijr", "An-Nahl",
-    "Al-Isra", "Al-Kahf", "Maryam",
-    "Ta-Ha", "Al-Anbiya", "Al-Hajj",
-    "Al-Muminun", "An-Nur", "Al-Furqan",
-    "Ash-Shuara", "An-Naml", "Al-Qasas",
-    "Al-Ankabut", "Ar-Rum", "Luqman",
-    "As-Sajdah", "Al-Ahzab", "Saba",
-    "Fatir", "Ya-Sin", "As-Saffat",
-    "Sad", "Az-Zumar", "Ghafir",
-    "Fussilat", "Ash-Shura", "Az-Zukhruf",
-    "Ad-Dukhan", "Al-Jathiyah", "Al-Ahqaf",
-    "Muhammad", "Al-Fath", "Al-Hujurat",
-    "Qaf", "Adh-Dhariyat", "At-Tur",
-    "An-Najm", "Al-Qamar", "Ar-Rahman",
-    "Al-Waqiah", "Al-Hadid", "Al-Mujadilah",
-    "Al-Hashr", "Al-Mumtahanah", "As-Saff",
-    "Al-Jumuah", "Al-Munafiqun", "At-Taghabun",
-    "At-Talaq", "At-Tahrim", "Al-Mulk",
-    "Al-Qalam", "Al-Haqqah", "Al-Maarij",
-    "Nuh", "Al-Jinn", "Al-Muzzammil",
-    "Al-Muddaththir", "Al-Qiyamah", "Al-Insan",
-    "Al-Mursalat", "An-Naba", "An-Naziat",
-    "Abasa", "At-Takwir", "Al-Infitar",
-    "Al-Mutaffifin", "Al-Inshiqaq", "Al-Buruj",
-    "At-Tariq", "Al-Ala", "Al-Ghashiyah",
-    "Al-Fajr", "Al-Balad", "Ash-Shams",
-    "Al-Lail", "Ad-Duha", "Ash-Sharh",
-    "At-Tin", "Al-Alaq", "Al-Qadr",
-    "Al-Bayyinah", "Az-Zalzalah", "Al-Adiyat",
-    "Al-Qariah", "At-Takathur", "Al-Asr",
-    "Al-Humazah", "Al-Fil", "Quraish",
-    "Al-Maun", "Al-Kawthar", "Al-Kafirun",
-    "An-Nasr", "Al-Masad", "Al-Ikhlas",
-    "Al-Falaq", "An-Nas"
-  ];
-
-  const heading = document.createElement("h2");
-  heading.textContent = "📖 Leitor do Alcorão";
-  detail.appendChild(heading);
-if (/islam|islã/i.test(r.n || "")) {
-  const quranButton = document.createElement("button");
-  quranButton.className = "action";
-  quranButton.textContent = "📖 Ler o Alcorão";
-  quranButton.style.margin = "10px 0";
-  quranButton.onclick = () => openQuranReader(1);
-  detail.appendChild(quranButton);
-}
-
-
-  const intro = document.createElement("p");
-  intro.textContent =
-    "Tradução dos significados em português · Helmi Nasr";
-  detail.appendChild(intro);
-
-  const label = document.createElement("label");
-  label.textContent = "Escolha uma surata";
-  detail.appendChild(label);
-
-  const select = document.createElement("select");
-  select.setAttribute("aria-label", "Escolher surata");
-
-  surahs.forEach((name, index) => {
-    const option = document.createElement("option");
-    option.value = index + 1;
-    option.textContent = `${index + 1}. ${name}`;
-    select.appendChild(option);
-  });
-
-  select.value = String(startSura);
-  detail.appendChild(select);
-
-  const status = document.createElement("p");
-  status.className = "muted";
-  status.textContent = "Preparando leitura...";
-  detail.appendChild(status);
-
-  const passage = document.createElement("div");
-  passage.className = "book";
-  passage.style.lineHeight = "2";
-  passage.style.fontSize = "17px";
-  passage.style.marginTop = "15px";
-  detail.appendChild(passage);
-
-  const controls = document.createElement("div");
-  controls.style.marginTop = "15px";
-
-  const previous = document.createElement("button");
-  previous.className = "secondary";
-  previous.textContent = "← Surata anterior";
-
-  const next = document.createElement("button");
-  next.className = "action";
-  next.textContent = "Próxima surata →";
-
-  controls.append(previous, next);
-  detail.appendChild(controls);
-
-  const source = document.createElement("p");
-  source.className = "muted";
-  source.style.fontSize = "12px";
-  source.textContent =
-    "Fonte: QuranEnc.com · Tradução dos significados por Helmi Nasr.";
-  detail.appendChild(source);
-
-  const back = document.createElement("button");
-  back.className = "secondary";
-  back.textContent = "← Voltar à biblioteca";
-  back.style.marginTop = "10px";
-  back.onclick = () => {
-    const islam = religions.find(item =>
-      /islam|islã/i.test(item.n || "")
-    );
-    if (islam) openReligion(islam);
-    else render();
-  };
-  detail.appendChild(back);
-
-  let requestNumber = 0;
-
-  async function loadSura(number) {
-    const currentRequest = ++requestNumber;
-    select.value = String(number);
-    passage.replaceChildren();
-    status.textContent = "Carregando surata...";
-    previous.disabled = number <= 1;
-    next.disabled = number >= 114;
-
-    try {
-      const url =
-        "https://quranenc.com/api/v1/translation/sura/" +
-        "portuguese_nasr/" + number;
-
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error("Não foi possível acessar a fonte.");
-      }
-
-      const data = await response.json();
-
-      if (currentRequest !== requestNumber) return;
-
-      const verses = Array.isArray(data)
-        ? data
-        : (data.result || data.data || []);
-
-      if (!verses.length) {
-        throw new Error("A fonte não retornou os versículos.");
-      }
-
-      status.textContent =
-        `Surata ${number} · ${surahs[number - 1]}`;
-
-      verses.forEach(verse => {
-        const p = document.createElement("p");
-        p.style.marginBottom = "18px";
-
-        const numberLabel = document.createElement("strong");
-        numberLabel.textContent = `[${verse.aya}] `;
-
-        const text = document.createElement("span");
-        text.textContent = verse.translation || "";
-
-        p.append(numberLabel, text);
-        passage.appendChild(p);
-      });
-    } catch (error) {
-      if (currentRequest !== requestNumber) return;
-      status.textContent =
-        "Não foi possível carregar esta surata. " +
-        "Verifique a conexão e tente novamente.";
-      console.error("Erro ao carregar o Alcorão:", error);
-    }
-  }
-
-  select.addEventListener("change", () => {
-    loadSura(Number(select.value));
-  });
-
-  previous.addEventListener("click", () => {
-    if (Number(select.value) > 1) {
-      loadSura(Number(select.value) - 1);
-    }
-  });
-
-  next.addEventListener("click", () => {
-    if (Number(select.value) < 114) {
-      loadSura(Number(select.value) + 1);
-    }
-  });
-
-  loadSura(Number(startSura) || 1);
-}
 
 <script>
 const religions = [
@@ -604,51 +309,82 @@ const grid=document.getElementById("grid");
 const search=document.getElementById("search");
 const detail=document.getElementById("detail");
 
+/* Helper para criar elementos */
+function el(tag,props={},...kids){
+  const e=document.createElement(tag);
+  Object.assign(e,props);
+  kids.forEach(k=>e.append(k));
+  return e;
+}
+
 function render(){
   const q=search.value.trim().toLocaleLowerCase("pt-BR");
   grid.innerHTML="";
   religions.filter(r=>
     (r.n+" "+r.g+" "+r.o+" "+r.b).toLocaleLowerCase("pt-BR").includes(q)
   ).forEach(r=>{
-    const b=document.createElement("button");
-    b.className="card";
-    const icon=document.createElement("span");
-    icon.className="emoji";
-    icon.textContent=r.e;
-    const name=document.createElement("strong");
-    name.textContent=r.n;
-    const small=document.createElement("small");
-    small.textContent=r.g;
-    b.append(icon,name,small);
-    b.onclick=()=>openReligion(r);
+    const b=el("button",{className:"card",onclick:()=>openReligion(r)},
+      el("span",{className:"emoji",textContent:r.e}),
+      el("strong",{textContent:r.n}),
+      el("small",{textContent:r.g}));
     grid.appendChild(b);
   });
   if(!grid.children.length) grid.textContent="Nenhuma religião encontrada.";
 }
 
 function addSection(parent,title,value){
-  const h=document.createElement("h3");
-  h.textContent=title;
-  const p=document.createElement("p");
-  p.textContent=value;
-  parent.append(h,p);
+  parent.append(el("h3",{textContent:title}),el("p",{textContent:value}));
 }
 
+/* ---------- Mapas dos leitores ---------- */
+const bibleBooks=[
+ ["Gen","Gênesis"],["Exod","Êxodo"],["Lev","Levítico"],["Num","Números"],["Deut","Deuteronômio"],
+ ["Josh","Josué"],["Judg","Juízes"],["Ruth","Rute"],["1Sam","1 Samuel"],["2Sam","2 Samuel"],
+ ["1Kgs","1 Reis"],["2Kgs","2 Reis"],["1Chr","1 Crônicas"],["2Chr","2 Crônicas"],["Ezra","Esdras"],
+ ["Neh","Neemias"],["Esth","Ester"],["Job","Jó"],["Ps","Salmos"],["Prov","Provérbios"],
+ ["Eccl","Eclesiastes"],["Song","Cântico dos Cânticos"],["Isa","Isaías"],["Jer","Jeremias"],
+ ["Lam","Lamentações"],["Ezek","Ezequiel"],["Dan","Daniel"],["Hos","Oseias"],["Joel","Joel"],
+ ["Amos","Amós"],["Obad","Obadias"],["Jonah","Jonas"],["Mic","Miqueias"],["Nah","Naum"],
+ ["Hab","Habacuque"],["Zeph","Sofonias"],["Hag","Ageu"],["Zech","Zacarias"],["Mal","Malaquias"],
+ ["Matt","Mateus"],["Mark","Marcos"],["Luke","Lucas"],["John","João"],["Acts","Atos dos Apóstolos"],
+ ["Rom","Romanos"],["1Cor","1 Coríntios"],["2Cor","2 Coríntios"],["Gal","Gálatas"],["Eph","Efésios"],
+ ["Phil","Filipenses"],["Col","Colossenses"],["1Thess","1 Tessalonicenses"],["2Thess","2 Tessalonicenses"],
+ ["1Tim","1 Timóteo"],["2Tim","2 Timóteo"],["Titus","Tito"],["Phlm","Filemom"],["Heb","Hebreus"],
+ ["Jas","Tiago"],["1Pet","1 Pedro"],["2Pet","2 Pedro"],["1John","1 João"],["2John","2 João"],
+ ["3John","3 João"],["Jude","Judas"],["Rev","Apocalipse"]
+];
 
+const bibleBookMap={
+ "Bíblia Sagrada":"Gen","Gênesis":"Gen","Êxodo":"Exod","Salmos":"Ps","Provérbios":"Prov","Isaías":"Isa",
+ "Evangelho de Mateus":"Matt","Evangelho de Marcos":"Mark","Evangelho de Lucas":"Luke",
+ "Evangelho de João":"John","Atos dos Apóstolos":"Acts","Romanos":"Rom","Apocalipse":"Rev"
+};
+
+const quranMap={"Alcorão":1,"Al-Fatiha":1,"Al-Baqarah":2,"Yusuf":12,"Ar-Rahman":55};
+
+const surahs=[
+ "Al-Fatiha","Al-Baqarah","Al-Imran","An-Nisa","Al-Maidah","Al-Anam","Al-Araf","Al-Anfal","At-Tawbah",
+ "Yunus","Hud","Yusuf","Ar-Rad","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Ta-Ha",
+ "Al-Anbiya","Al-Hajj","Al-Muminun","An-Nur","Al-Furqan","Ash-Shuara","An-Naml","Al-Qasas","Al-Ankabut",
+ "Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir",
+ "Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath",
+ "Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqiah","Al-Hadid",
+ "Al-Mujadilah","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumuah","Al-Munafiqun","At-Taghabun","At-Talaq",
+ "At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Maarij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir",
+ "Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Naziat","Abasa","At-Takwir","Al-Infitar",
+ "Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-Ala","Al-Ghashiyah","Al-Fajr","Al-Balad",
+ "Ash-Shams","Al-Lail","Ad-Duha","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah",
+ "Al-Adiyat","Al-Qariah","At-Takathur","Al-Asr","Al-Humazah","Al-Fil","Quraish","Al-Maun","Al-Kawthar",
+ "Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"
+];
+
+/* ---------- Página de uma religião ---------- */
 function openReligion(r){
   document.getElementById("home").style.display="none";
   detail.style.display="block";
   detail.innerHTML="";
 
-  const h=document.createElement("h2");
-  h.textContent=r.e+" "+r.n;
-  detail.appendChild(h);
-
-  const tag=document.createElement("span");
-  tag.className="tag";
-  tag.textContent=r.g;
-  detail.appendChild(tag);
-
+  detail.append(el("h2",{textContent:r.e+" "+r.n}),el("span",{className:"tag",textContent:r.g}));
   addSection(detail,"📜 Origem e história",r.h);
   addSection(detail,"✨ Crenças e ensinamentos",r.c);
   addSection(detail,"📖 Textos sagrados",r.b);
@@ -656,222 +392,102 @@ function openReligion(r){
   addSection(detail,"🎉 Festividades",r.f);
   addSection(detail,"❓ Pergunta frequente",r.q);
 
-  const hr=document.createElement("hr");
-  detail.appendChild(hr);
+  detail.append(el("hr"),el("h3",{textContent:"📚 Biblioteca Sagrada"}));
 
-  const title=document.createElement("h3");
-  title.textContent="📚 Biblioteca Sagrada";
-  detail.appendChild(title);
+  const isChristian=r.n==="Cristianismo";
+  const isMuslim=r.n==="Islamismo";
 
-  if(r.n==="Cristianismo"){
-    const read=document.createElement("button");
-    read.className="action";
-    read.textContent="📖 Abrir Bíblia completa";
-    read.onclick=()=>openBibleReader("Gen");
-    detail.appendChild(read);
+  if(isChristian){
+    detail.appendChild(el("button",{className:"action",textContent:"📖 Abrir Bíblia completa",onclick:()=>openBibleReader("Gen")}));
+  }
+  if(isMuslim){
+    detail.appendChild(el("button",{className:"action",textContent:"📖 Ler o Alcorão",onclick:()=>openQuranReader(1)}));
   }
 
-  const intro=document.createElement("p");
-  intro.textContent="Toque em um livro bíblico para começar a leitura. Os capítulos serão carregados pela internet.";
-  detail.appendChild(intro);
+  detail.appendChild(el("p",{textContent:
+    isChristian ? "Toque em um livro bíblico para começar a leitura. Os capítulos serão carregados pela internet."
+    : isMuslim ? "Toque em uma surata para ler a tradução dos significados. O texto será carregado pela internet."
+    : "Conheça as principais obras e tradições desta religião."}));
 
-  const filter=document.createElement("input");
-  filter.type="search";
-  filter.placeholder="🔎 Pesquisar livros...";
-  filter.setAttribute("aria-label","Pesquisar livros");
-  detail.appendChild(filter);
-
-  const list=document.createElement("div");
-  list.className="grid";
-  detail.appendChild(list);
+  const filter=el("input",{type:"search",placeholder:"🔎 Pesquisar livros...",ariaLabel:"Pesquisar livros"});
+  const list=el("div",{className:"grid"});
+  detail.append(filter,list);
 
   function renderBooks(){
     const term=filter.value.trim().toLocaleLowerCase("pt-BR");
     list.innerHTML="";
+    r.books.filter(b=>(b[0]+" "+b[1]+" "+b[2]).toLocaleLowerCase("pt-BR").includes(term)).forEach(book=>{
+      const card=el("article",{className:"book"},
+        el("div",{className:"kind",textContent:book[2]}),
+        el("h4",{textContent:"📖 "+book[0]}),
+        el("p",{textContent:book[1]}));
 
-    r.books.filter(book=>
-      (book[0]+" "+book[1]+" "+book[2])
-        .toLocaleLowerCase("pt-BR").includes(term)
-    ).forEach(book=>{
-      const card=document.createElement("article");
-      card.className="book";
+      let action=null;
+      if(isChristian && bibleBookMap[book[0]]) action=()=>openBibleReader(bibleBookMap[book[0]]);
+      if(isMuslim && quranMap[book[0]]) action=()=>openQuranReader(quranMap[book[0]]);
 
-      const kind=document.createElement("div");
-      kind.className="kind";
-      kind.textContent=book[2];
-
-      const name=document.createElement("h4");
-      name.textContent="📖 "+book[0];
-
-      const desc=document.createElement("p");
-      desc.textContent=book[1];
-
-      card.append(kind,name,desc);
-
-      if(r.n==="Cristianismo"){
-        const osis=bibleBookMap[book[0]];
-        if(osis || book[0]==="Bíblia Sagrada"){
-          card.style.cursor="pointer";
-          card.tabIndex=0;
-          card.setAttribute("role","button");
-          card.onclick=()=>{
-            openBibleReader(osis || "Gen");
-          };
-          card.onkeydown=e=>{
-            if(e.key==="Enter" || e.key===" "){
-              e.preventDefault();
-              card.click();
-            }
-          };
-        }
+      if(action){
+        card.style.cursor="pointer";
+        card.tabIndex=0;
+        card.setAttribute("role","button");
+        card.onclick=action;
+        card.onkeydown=e=>{
+          if(e.key==="Enter"||e.key===" "){e.preventDefault();action();}
+        };
       }
-
       list.appendChild(card);
     });
-
-    if(!list.children.length){
-      list.textContent="Nenhum livro encontrado.";
-    }
+    if(!list.children.length) list.textContent="Nenhum livro encontrado.";
   }
-
   filter.addEventListener("input",renderBooks);
   renderBooks();
 
-  const note=document.createElement("p");
-  note.className="muted";
-  note.style.fontSize="13px";
-  note.textContent="A leitura integral da Bíblia utiliza a tradução Almeida 1819, disponibilizada pelo projeto bible-data. É necessária conexão com a internet.";
-  detail.appendChild(note);
+  if(isChristian||isMuslim){
+    const note=el("p",{className:"muted",textContent: isChristian
+      ? "A leitura integral da Bíblia utiliza a tradução Almeida 1819, disponibilizada pelo projeto bible-data. É necessária conexão com a internet."
+      : "A leitura do Alcorão utiliza a tradução dos significados por Helmi Nasr, disponibilizada pelo QuranEnc.com. É necessária conexão com a internet."});
+    note.style.fontSize="13px";
+    detail.appendChild(note);
+  }
 
-  const back=document.createElement("button");
-  back.className="action";
-  back.textContent="← Voltar às religiões";
-  back.onclick=()=>{
+  detail.appendChild(el("button",{className:"action",textContent:"← Voltar às religiões",onclick:()=>{
     detail.style.display="none";
     document.getElementById("home").style.display="block";
     window.scrollTo(0,0);
-  };
-  detail.appendChild(back);
+  }}));
   window.scrollTo(0,0);
 }
 
-const bibleBooks=[
- ["Gen","Gênesis"],["Exod","Êxodo"],["Lev","Levítico"],
- ["Num","Números"],["Deut","Deuteronômio"],["Josh","Josué"],
- ["Judg","Juízes"],["Ruth","Rute"],["1Sam","1 Samuel"],
- ["2Sam","2 Samuel"],["1Kgs","1 Reis"],["2Kgs","2 Reis"],
- ["1Chr","1 Crônicas"],["2Chr","2 Crônicas"],["Ezra","Esdras"],
- ["Neh","Neemias"],["Esth","Ester"],["Job","Jó"],
- ["Ps","Salmos"],["Prov","Provérbios"],["Eccl","Eclesiastes"],
- ["Song","Cântico dos Cânticos"],["Isa","Isaías"],["Jer","Jeremias"],
- ["Lam","Lamentações"],["Ezek","Ezequiel"],["Dan","Daniel"],
- ["Hos","Oseias"],["Joel","Joel"],["Amos","Amós"],
- ["Obad","Obadias"],["Jonah","Jonas"],["Mic","Miqueias"],
- ["Nah","Naum"],["Hab","Habacuque"],["Zeph","Sofonias"],
- ["Hag","Ageu"],["Zech","Zacarias"],["Mal","Malaquias"],
- ["Matt","Mateus"],["Mark","Marcos"],["Luke","Lucas"],
- ["John","João"],["Acts","Atos dos Apóstolos"],
- ["Rom","Romanos"],["1Cor","1 Coríntios"],["2Cor","2 Coríntios"],
- ["Gal","Gálatas"],["Eph","Efésios"],["Phil","Filipenses"],
- ["Col","Colossenses"],["1Thess","1 Tessalonicenses"],
- ["2Thess","2 Tessalonicenses"],["1Tim","1 Timóteo"],
- ["2Tim","2 Timóteo"],["Titus","Tito"],["Phlm","Filemom"],
- ["Heb","Hebreus"],["Jas","Tiago"],["1Pet","1 Pedro"],
- ["2Pet","2 Pedro"],["1John","1 João"],["2John","2 João"],
- ["3John","3 João"],["Jude","Judas"],["Rev","Apocalipse"]
-];
-
-const bibleBookMap={
- "Bíblia Sagrada":"Gen",
- "Gênesis":"Gen",
- "Êxodo":"Exod",
- "Salmos":"Ps",
- "Provérbios":"Prov",
- "Isaías":"Isa",
- "Evangelho de Mateus":"Matt",
- "Evangelho de Marcos":"Mark",
- "Evangelho de Lucas":"Luke",
- "Evangelho de João":"John",
- "Atos dos Apóstolos":"Acts",
- "Romanos":"Rom",
- "Apocalipse":"Rev"
-};
-
+/* ---------- Leitor da Bíblia ---------- */
 async function openBibleReader(startBook){
   detail.innerHTML="";
   detail.style.display="block";
 
-  const heading=document.createElement("h2");
-  heading.textContent="📖 Leitor da Bíblia";
-  detail.appendChild(heading);
-
-  const intro=document.createElement("p");
-  intro.textContent="Almeida 1819 · Bíblia Livre";
-  detail.appendChild(intro);
-
-  const bookLabel=document.createElement("label");
-  bookLabel.textContent="Livro bíblico";
-  detail.appendChild(bookLabel);
-
-  const bookSelect=document.createElement("select");
-  bookSelect.setAttribute("aria-label","Escolher livro bíblico");
-
-  bibleBooks.forEach(([id,name])=>{
-    const option=document.createElement("option");
-    option.value=id;
-    option.textContent=name;
-    bookSelect.appendChild(option);
-  });
+  const bookSelect=el("select",{ariaLabel:"Escolher livro bíblico"});
+  bibleBooks.forEach(([id,name])=>bookSelect.append(el("option",{value:id,textContent:name})));
   bookSelect.value=startBook;
-  detail.appendChild(bookSelect);
 
-  const chapterLabel=document.createElement("label");
-  chapterLabel.textContent="Capítulo";
-  detail.appendChild(chapterLabel);
+  const chapterSelect=el("select",{ariaLabel:"Escolher capítulo"});
+  const status=el("p",{className:"muted",textContent:"Carregando capítulo..."});
+  const passage=el("div",{className:"book"});
+  passage.style.cssText="line-height:2;font-size:17px;margin-top:15px";
 
-  const chapterSelect=document.createElement("select");
-  chapterSelect.setAttribute("aria-label","Escolher capítulo");
-  detail.appendChild(chapterSelect);
-
-  const status=document.createElement("p");
-  status.className="muted";
-  status.textContent="Carregando capítulo...";
-  detail.appendChild(status);
-
-  const passage=document.createElement("div");
-  passage.className="book";
-  passage.style.lineHeight="2";
-  passage.style.fontSize="17px";
-  passage.style.marginTop="15px";
-  detail.appendChild(passage);
-
-  const controls=document.createElement("div");
+  const previous=el("button",{className:"secondary",textContent:"← Capítulo anterior"});
+  const next=el("button",{className:"action",textContent:"Próximo capítulo →"});
+  const controls=el("div",{},previous,next);
   controls.style.marginTop="15px";
 
-  const previous=document.createElement("button");
-  previous.className="secondary";
-  previous.textContent="← Capítulo anterior";
-
-  const next=document.createElement("button");
-  next.className="action";
-  next.textContent="Próximo capítulo →";
-
-  controls.append(previous,next);
-  detail.appendChild(controls);
-
-  const source=document.createElement("p");
-  source.className="muted";
+  const source=el("p",{className:"muted",textContent:"Fonte dos textos: midvash/bible-data · Almeida 1819."});
   source.style.fontSize="12px";
-  source.textContent="Fonte dos textos: midvash/bible-data · Almeida 1819.";
-  detail.appendChild(source);
+  const back=el("button",{className:"secondary",textContent:"← Voltar à biblioteca",
+    onclick:()=>openReligion(religions.find(i=>i.n==="Cristianismo"))});
 
-  const back=document.createElement("button");
-  back.className="secondary";
-  back.textContent="← Voltar à biblioteca";
-  back.onclick=()=>openReligion(
-    religions.find(item=>item.n==="Cristianismo")
-  );
-  detail.appendChild(back);
+  detail.append(
+    el("h2",{textContent:"📖 Leitor da Bíblia"}),
+    el("p",{textContent:"Almeida 1819 · Bíblia Livre"}),
+    el("label",{textContent:"Livro bíblico"}),bookSelect,
+    el("label",{textContent:"Capítulo"}),chapterSelect,
+    status,passage,controls,source,back);
 
   let bookData=null;
   let requestNumber=0;
@@ -881,91 +497,50 @@ async function openBibleReader(startBook){
     passage.innerHTML="";
     chapterSelect.innerHTML="";
     status.textContent="Carregando livro...";
-
     try{
-      const url=
-        "https://raw.githubusercontent.com/midvash/bible-data/main/versions/pt/almeida-livre/books/"
-        +bookSelect.value+".json";
-
+      const url="https://raw.githubusercontent.com/midvash/bible-data/main/versions/pt/almeida-livre/books/"+bookSelect.value+".json";
       const response=await fetch(url);
-      if(!response.ok) throw new Error("Arquivo indisponível");
-
+      if(!response.ok) throw new Error("HTTP "+response.status);
       const data=await response.json();
       if(currentRequest!==requestNumber) return;
-
       bookData=data;
-
-      data.chapters.forEach(chapter=>{
-        const option=document.createElement("option");
-        option.value=chapter.chapter;
-        option.textContent="Capítulo "+chapter.chapter;
-        chapterSelect.appendChild(option);
-      });
-
-      status.textContent=data.englishName
-        ? "Livro carregado. Escolha um capítulo para ler."
-        : "Livro carregado.";
-
+      data.chapters.forEach(c=>chapterSelect.append(el("option",{value:c.chapter,textContent:"Capítulo "+c.chapter})));
       await loadChapter();
     }catch(error){
       if(currentRequest!==requestNumber) return;
-      status.textContent="Não foi possível carregar este livro. Verifique sua conexão e tente novamente.";
-      passage.textContent="";
+      status.textContent="Não foi possível carregar este livro ("+error.message+"). Verifique sua conexão e tente novamente.";
+      console.error("Erro ao carregar a Bíblia:",error);
     }
   }
 
   async function loadChapter(){
     if(!bookData) return;
-
-    const chapter=bookData.chapters.find(
-      item=>String(item.chapter)===chapterSelect.value
-    );
+    const chapter=bookData.chapters.find(i=>String(i.chapter)===chapterSelect.value);
     if(!chapter) return;
-
     passage.innerHTML="";
-    const chapterTitle=document.createElement("h3");
-    chapterTitle.textContent=
-      bibleBooks.find(item=>item[0]===bookSelect.value)[1]
-      +" "+chapter.chapter;
-    passage.appendChild(chapterTitle);
-
-    chapter.verses.forEach(verse=>{
-      const line=document.createElement("p");
+    passage.appendChild(el("h3",{textContent:bibleBooks.find(i=>i[0]===bookSelect.value)[1]+" "+chapter.chapter}));
+    chapter.verses.forEach(v=>{
+      const num=el("strong",{textContent:v.number+" "});
+      num.style.color="var(--gold)";
+      const line=el("p",{},num,el("span",{textContent:v.text}));
       line.style.margin="0 0 12px";
-
-      const number=document.createElement("strong");
-      number.style.color="var(--gold)";
-      number.textContent=verse.number+" ";
-
-      const text=document.createElement("span");
-      text.textContent=verse.text;
-
-      line.append(number,text);
       passage.appendChild(line);
     });
-
-    status.textContent=
-      chapter.verses.length+" versículos carregados.";
-
-    previous.disabled=
-      Number(chapterSelect.value)<=1;
-
-    next.disabled=
-      Number(chapterSelect.value)>=bookData.chapters.length;
+    status.textContent=chapter.verses.length+" versículos carregados.";
+    previous.disabled=Number(chapterSelect.value)<=1;
+    next.disabled=Number(chapterSelect.value)>=bookData.chapters.length;
   }
 
   bookSelect.addEventListener("change",loadBook);
   chapterSelect.addEventListener("change",loadChapter);
-
   previous.onclick=()=>{
     if(Number(chapterSelect.value)>1){
       chapterSelect.value=String(Number(chapterSelect.value)-1);
       loadChapter();
     }
   };
-
   next.onclick=()=>{
-    if(Number(chapterSelect.value)<bookData.chapters.length){
+    if(bookData && Number(chapterSelect.value)<bookData.chapters.length){
       chapterSelect.value=String(Number(chapterSelect.value)+1);
       loadChapter();
     }
@@ -975,14 +550,78 @@ async function openBibleReader(startBook){
   window.scrollTo(0,0);
 }
 
+/* ---------- Leitor do Alcorão ---------- */
+async function openQuranReader(startSura=1){
+  detail.innerHTML="";
+  detail.style.display="block";
+
+  const select=el("select",{ariaLabel:"Escolher surata"});
+  surahs.forEach((name,i)=>select.append(el("option",{value:i+1,textContent:(i+1)+". "+name})));
+  select.value=String(startSura);
+
+  const status=el("p",{className:"muted",textContent:"Preparando leitura..."});
+  const passage=el("div",{className:"book"});
+  passage.style.cssText="line-height:2;font-size:17px;margin-top:15px";
+
+  const previous=el("button",{className:"secondary",textContent:"← Surata anterior"});
+  const next=el("button",{className:"action",textContent:"Próxima surata →"});
+  const controls=el("div",{},previous,next);
+  controls.style.marginTop="15px";
+
+  const source=el("p",{className:"muted",textContent:"Fonte: QuranEnc.com · Tradução dos significados por Helmi Nasr."});
+  source.style.fontSize="12px";
+  const back=el("button",{className:"secondary",textContent:"← Voltar à biblioteca",
+    onclick:()=>openReligion(religions.find(i=>i.n==="Islamismo"))});
+
+  detail.append(
+    el("h2",{textContent:"📖 Leitor do Alcorão"}),
+    el("p",{textContent:"Tradução dos significados em português · Helmi Nasr"}),
+    el("label",{textContent:"Escolha uma surata"}),select,
+    status,passage,controls,source,back);
+
+  let requestNumber=0;
+
+  async function loadSura(number){
+    const currentRequest=++requestNumber;
+    select.value=String(number);
+    passage.replaceChildren();
+    status.textContent="Carregando surata...";
+    previous.disabled=number<=1;
+    next.disabled=number>=114;
+    try{
+      const url="https://quranenc.com/api/v1/translation/sura/portuguese_nasr/"+number;
+      const response=await fetch(url);
+      if(!response.ok) throw new Error("HTTP "+response.status);
+      const data=await response.json();
+      if(currentRequest!==requestNumber) return;
+      const verses=Array.isArray(data)?data:(data.result||data.data||[]);
+      if(!verses.length) throw new Error("a fonte não retornou versículos");
+      status.textContent="Surata "+number+" · "+surahs[number-1];
+      verses.forEach(v=>{
+        const num=el("strong",{textContent:"["+v.aya+"] "});
+        const line=el("p",{},num,el("span",{textContent:v.translation||""}));
+        line.style.marginBottom="18px";
+        passage.appendChild(line);
+      });
+    }catch(error){
+      if(currentRequest!==requestNumber) return;
+      status.textContent="Não foi possível carregar esta surata ("+error.message+"). Verifique a conexão e tente novamente.";
+      console.error("Erro ao carregar o Alcorão:",error);
+    }
+  }
+
+  select.addEventListener("change",()=>loadSura(Number(select.value)));
+  previous.addEventListener("click",()=>{ if(Number(select.value)>1) loadSura(Number(select.value)-1); });
+  next.addEventListener("click",()=>{ if(Number(select.value)<114) loadSura(Number(select.value)+1); });
+
+  window.scrollTo(0,0);
+  loadSura(Number(startSura)||1);
+}
+
+/* ---------- Comparação ---------- */
 function fillSelect(id){
   const s=document.getElementById(id);
-  religions.forEach((r,i)=>{
-    const o=document.createElement("option");
-    o.value=i;
-    o.textContent=r.n;
-    s.appendChild(o);
-  });
+  religions.forEach((r,i)=>s.append(el("option",{value:i,textContent:r.n})));
 }
 
 function compare(){
@@ -991,9 +630,7 @@ function compare(){
   const box=document.getElementById("comparison");
   box.innerHTML="";
   box.style.display="block";
-  const h=document.createElement("h3");
-  h.textContent=a.n+" × "+b.n;
-  box.appendChild(h);
+  box.appendChild(el("h3",{textContent:a.n+" × "+b.n}));
   addSection(box,"Origem",a.n+": "+a.o+"\n"+b.n+": "+b.o);
   addSection(box,"Textos sagrados",a.n+": "+a.b+"\n"+b.n+": "+b.b);
   addSection(box,"Crenças",a.n+": "+a.c+"\n"+b.n+": "+b.c);
