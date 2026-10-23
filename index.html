@@ -166,6 +166,200 @@ hr { border:0; border-top:1px solid #35405f; margin:22px 0; }
   Conhecer uma crença não significa precisar adotá-la.
 </footer>
 
+async function openQuranReader(startSura = 1) {
+  detail.innerHTML = "";
+  detail.style.display = "block";
+
+  const surahs = [
+    "Al-Fatiha", "Al-Baqarah", "Al-Imran",
+    "An-Nisa", "Al-Maidah", "Al-Anam",
+    "Al-Araf", "Al-Anfal", "At-Tawbah",
+    "Yunus", "Hud", "Yusuf", "Ar-Rad",
+    "Ibrahim", "Al-Hijr", "An-Nahl",
+    "Al-Isra", "Al-Kahf", "Maryam",
+    "Ta-Ha", "Al-Anbiya", "Al-Hajj",
+    "Al-Muminun", "An-Nur", "Al-Furqan",
+    "Ash-Shuara", "An-Naml", "Al-Qasas",
+    "Al-Ankabut", "Ar-Rum", "Luqman",
+    "As-Sajdah", "Al-Ahzab", "Saba",
+    "Fatir", "Ya-Sin", "As-Saffat",
+    "Sad", "Az-Zumar", "Ghafir",
+    "Fussilat", "Ash-Shura", "Az-Zukhruf",
+    "Ad-Dukhan", "Al-Jathiyah", "Al-Ahqaf",
+    "Muhammad", "Al-Fath", "Al-Hujurat",
+    "Qaf", "Adh-Dhariyat", "At-Tur",
+    "An-Najm", "Al-Qamar", "Ar-Rahman",
+    "Al-Waqiah", "Al-Hadid", "Al-Mujadilah",
+    "Al-Hashr", "Al-Mumtahanah", "As-Saff",
+    "Al-Jumuah", "Al-Munafiqun", "At-Taghabun",
+    "At-Talaq", "At-Tahrim", "Al-Mulk",
+    "Al-Qalam", "Al-Haqqah", "Al-Maarij",
+    "Nuh", "Al-Jinn", "Al-Muzzammil",
+    "Al-Muddaththir", "Al-Qiyamah", "Al-Insan",
+    "Al-Mursalat", "An-Naba", "An-Naziat",
+    "Abasa", "At-Takwir", "Al-Infitar",
+    "Al-Mutaffifin", "Al-Inshiqaq", "Al-Buruj",
+    "At-Tariq", "Al-Ala", "Al-Ghashiyah",
+    "Al-Fajr", "Al-Balad", "Ash-Shams",
+    "Al-Lail", "Ad-Duha", "Ash-Sharh",
+    "At-Tin", "Al-Alaq", "Al-Qadr",
+    "Al-Bayyinah", "Az-Zalzalah", "Al-Adiyat",
+    "Al-Qariah", "At-Takathur", "Al-Asr",
+    "Al-Humazah", "Al-Fil", "Quraish",
+    "Al-Maun", "Al-Kawthar", "Al-Kafirun",
+    "An-Nasr", "Al-Masad", "Al-Ikhlas",
+    "Al-Falaq", "An-Nas"
+  ];
+
+  const heading = document.createElement("h2");
+  heading.textContent = "📖 Leitor do Alcorão";
+  detail.appendChild(heading);
+
+  const intro = document.createElement("p");
+  intro.textContent =
+    "Tradução dos significados em português · Helmi Nasr";
+  detail.appendChild(intro);
+
+  const label = document.createElement("label");
+  label.textContent = "Escolha uma surata";
+  detail.appendChild(label);
+
+  const select = document.createElement("select");
+  select.setAttribute("aria-label", "Escolher surata");
+
+  surahs.forEach((name, index) => {
+    const option = document.createElement("option");
+    option.value = index + 1;
+    option.textContent = `${index + 1}. ${name}`;
+    select.appendChild(option);
+  });
+
+  select.value = String(startSura);
+  detail.appendChild(select);
+
+  const status = document.createElement("p");
+  status.className = "muted";
+  status.textContent = "Preparando leitura...";
+  detail.appendChild(status);
+
+  const passage = document.createElement("div");
+  passage.className = "book";
+  passage.style.lineHeight = "2";
+  passage.style.fontSize = "17px";
+  passage.style.marginTop = "15px";
+  detail.appendChild(passage);
+
+  const controls = document.createElement("div");
+  controls.style.marginTop = "15px";
+
+  const previous = document.createElement("button");
+  previous.className = "secondary";
+  previous.textContent = "← Surata anterior";
+
+  const next = document.createElement("button");
+  next.className = "action";
+  next.textContent = "Próxima surata →";
+
+  controls.append(previous, next);
+  detail.appendChild(controls);
+
+  const source = document.createElement("p");
+  source.className = "muted";
+  source.style.fontSize = "12px";
+  source.textContent =
+    "Fonte: QuranEnc.com · Tradução dos significados por Helmi Nasr.";
+  detail.appendChild(source);
+
+  const back = document.createElement("button");
+  back.className = "secondary";
+  back.textContent = "← Voltar à biblioteca";
+  back.style.marginTop = "10px";
+  back.onclick = () => {
+    const islam = religions.find(item =>
+      /islam|islã/i.test(item.n || "")
+    );
+    if (islam) openReligion(islam);
+    else render();
+  };
+  detail.appendChild(back);
+
+  let requestNumber = 0;
+
+  async function loadSura(number) {
+    const currentRequest = ++requestNumber;
+    select.value = String(number);
+    passage.replaceChildren();
+    status.textContent = "Carregando surata...";
+    previous.disabled = number <= 1;
+    next.disabled = number >= 114;
+
+    try {
+      const url =
+        "https://quranenc.com/api/v1/translation/sura/" +
+        "portuguese_nasr/" + number;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("Não foi possível acessar a fonte.");
+      }
+
+      const data = await response.json();
+
+      if (currentRequest !== requestNumber) return;
+
+      const verses = Array.isArray(data)
+        ? data
+        : (data.result || data.data || []);
+
+      if (!verses.length) {
+        throw new Error("A fonte não retornou os versículos.");
+      }
+
+      status.textContent =
+        `Surata ${number} · ${surahs[number - 1]}`;
+
+      verses.forEach(verse => {
+        const p = document.createElement("p");
+        p.style.marginBottom = "18px";
+
+        const numberLabel = document.createElement("strong");
+        numberLabel.textContent = `[${verse.aya}] `;
+
+        const text = document.createElement("span");
+        text.textContent = verse.translation || "";
+
+        p.append(numberLabel, text);
+        passage.appendChild(p);
+      });
+    } catch (error) {
+      if (currentRequest !== requestNumber) return;
+      status.textContent =
+        "Não foi possível carregar esta surata. " +
+        "Verifique a conexão e tente novamente.";
+      console.error("Erro ao carregar o Alcorão:", error);
+    }
+  }
+
+  select.addEventListener("change", () => {
+    loadSura(Number(select.value));
+  });
+
+  previous.addEventListener("click", () => {
+    if (Number(select.value) > 1) {
+      loadSura(Number(select.value) - 1);
+    }
+  });
+
+  next.addEventListener("click", () => {
+    if (Number(select.value) < 114) {
+      loadSura(Number(select.value) + 1);
+    }
+  });
+
+  loadSura(Number(startSura) || 1);
+}
+
 <script>
 const religions = [
 {
