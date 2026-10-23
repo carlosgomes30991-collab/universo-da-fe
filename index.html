@@ -360,6 +360,14 @@ const bibleBookMap={
  "Evangelho de João":"John","Atos dos Apóstolos":"Acts","Romanos":"Rom","Apocalipse":"Rev"
 };
 
+const readLinks={
+ "Hinduísmo":{items:[["Bhagavad Gita em português (PDF · Gita Society)","https://www.gita-society.com/wp-content/uploads/2019/01/BhagavadGitainPortugueseLanguage.pdf"]]},
+ "Budismo":{items:[["Dhammapada em português (PDF · Mosteiro Budista Theravada)","https://sumedharama.pt/wp-content/uploads/Publications/04-2013-dhammapada/Dhammapada-Acharya-Buddharakkhita.pdf"],["SuttaCentral · textos do cânone budista (escolha o idioma português)","https://suttacentral.net"]]},
+ "Taoismo":{items:[["Sociedade Taoísta do Brasil · tradução do Tao Te Ching","http://www.taoismo.org.br"]]},
+ "Espiritismo":{items:[["Kardecpedia · obras de Allan Kardec","https://kardecpedia.com"],["Federação Espírita Brasileira (FEB)","https://www.febnet.org.br"]]},
+ "Sikhismo":{items:[],note:"Não encontrei o Guru Granth Sahib em português em uma fonte gratuita e confiável."}
+};
+
 const quranMap={"Alcorão":1,"Al-Fatiha":1,"Al-Baqarah":2,"Yusuf":12,"Ar-Rahman":55};
 
 const surahs=[
@@ -396,6 +404,7 @@ function openReligion(r){
 
   const isChristian=r.n==="Cristianismo";
   const isMuslim=r.n==="Islamismo";
+  const isJewish=r.n==="Judaísmo";
 
   if(isChristian){
     detail.appendChild(el("button",{className:"action",textContent:"📖 Abrir Bíblia completa",onclick:()=>openBibleReader("Gen")}));
@@ -404,8 +413,13 @@ function openReligion(r){
     detail.appendChild(el("button",{className:"action",textContent:"📖 Ler o Alcorão",onclick:()=>openQuranReader(1)}));
   }
 
+  if(isJewish){
+    detail.appendChild(el("button",{className:"action",textContent:"📖 Ler a Torá",onclick:()=>openToraReader("Genesis")}));
+  }
+
   detail.appendChild(el("p",{textContent:
     isChristian ? "Toque em um livro bíblico para começar a leitura. Os capítulos serão carregados pela internet."
+    : isJewish ? "Toque em um livro para ler em português. O texto será carregado pela internet."
     : isMuslim ? "Toque em uma surata para ler a tradução dos significados. O texto será carregado pela internet."
     : "Conheça as principais obras e tradições desta religião."}));
 
@@ -425,6 +439,7 @@ function openReligion(r){
       let action=null;
       if(isChristian && bibleBookMap[book[0]]) action=()=>openBibleReader(bibleBookMap[book[0]]);
       if(isMuslim && quranMap[book[0]]) action=()=>openQuranReader(quranMap[book[0]]);
+      if(isJewish && toraMap[book[0]]) action=()=>openToraReader(toraMap[book[0]]);
 
       if(action){
         card.style.cursor="pointer";
@@ -442,9 +457,25 @@ function openReligion(r){
   filter.addEventListener("input",renderBooks);
   renderBooks();
 
-  if(isChristian||isMuslim){
+  const rl=readLinks[r.n];
+  if(rl){
+    detail.appendChild(el("h3",{textContent:"🔗 Ler online"}));
+    rl.items.forEach(([label,url])=>{
+      const a=el("a",{href:url,target:"_blank",rel:"noopener noreferrer",textContent:"↗ "+label});
+      a.style.cssText="display:block;color:var(--gold);margin:8px 0;word-break:break-word";
+      detail.appendChild(a);
+    });
+    if(rl.note) detail.appendChild(el("p",{className:"muted",textContent:rl.note}));
+    const warn=el("p",{className:"muted",textContent:"Links externos: o conteúdo pertence aos sites de origem."});
+    warn.style.fontSize="13px";
+    detail.appendChild(warn);
+  }
+
+  if(isChristian||isMuslim||isJewish){
     const note=el("p",{className:"muted",textContent: isChristian
       ? "A leitura integral da Bíblia utiliza a tradução Almeida 1819, disponibilizada pelo projeto bible-data. É necessária conexão com a internet."
+      : isJewish
+      ? "A leitura da Torá utiliza a tradução em português disponível na biblioteca da Sefaria.org. É necessária conexão com a internet."
       : "A leitura do Alcorão utiliza a tradução dos significados por Helmi Nasr, disponibilizada pelo QuranEnc.com. É necessária conexão com a internet."});
     note.style.fontSize="13px";
     detail.appendChild(note);
@@ -616,6 +647,90 @@ async function openQuranReader(startSura=1){
 
   window.scrollTo(0,0);
   loadSura(Number(startSura)||1);
+}
+
+/* ---------- Leitor da Torá (Sefaria) ---------- */
+const toraBooks=[["Genesis","Gênesis",50],["Exodus","Êxodo",40],["Leviticus","Levítico",27],["Numbers","Números",36],["Deuteronomy","Deuteronômio",34],["Psalms","Salmos",150],["Proverbs","Provérbios",31],["Isaiah","Isaías",66]];
+const toraMap={"Torá":"Genesis","Gênesis":"Genesis","Êxodo":"Exodus","Levítico":"Leviticus","Salmos":"Psalms"};
+
+async function openToraReader(startBook="Genesis"){
+  detail.innerHTML="";
+  detail.style.display="block";
+  const info=()=>toraBooks.find(b=>b[0]===bookSelect.value);
+
+  const bookSelect=el("select",{ariaLabel:"Escolher livro"});
+  toraBooks.forEach(([id,name])=>bookSelect.append(el("option",{value:id,textContent:name})));
+  bookSelect.value=startBook;
+  const chapterSelect=el("select",{ariaLabel:"Escolher capítulo"});
+  const status=el("p",{className:"muted",textContent:"Preparando leitura..."});
+  const passage=el("div",{className:"book"});
+  passage.style.cssText="line-height:2;font-size:17px;margin-top:15px";
+  const previous=el("button",{className:"secondary",textContent:"← Capítulo anterior"});
+  const next=el("button",{className:"action",textContent:"Próximo capítulo →"});
+  const controls=el("div",{},previous,next);
+  controls.style.marginTop="15px";
+  const source=el("p",{className:"muted",textContent:"Fonte: Sefaria.org · tradução em português disponível na biblioteca da Sefaria (o título da versão aparece acima do texto)."});
+  source.style.fontSize="12px";
+  const back=el("button",{className:"secondary",textContent:"← Voltar à biblioteca",
+    onclick:()=>openReligion(religions.find(i=>i.n==="Judaísmo"))});
+
+  detail.append(
+    el("h2",{textContent:"📖 Leitor da Torá e textos do Tanakh"}),
+    el("label",{textContent:"Livro"}),bookSelect,
+    el("label",{textContent:"Capítulo"}),chapterSelect,
+    status,passage,controls,source,back);
+
+  function fillChapters(){
+    chapterSelect.innerHTML="";
+    for(let i=1;i<=info()[2];i++) chapterSelect.append(el("option",{value:i,textContent:"Capítulo "+i}));
+  }
+
+  let requestNumber=0;
+  async function loadChapter(){
+    const current=++requestNumber;
+    const n=Number(chapterSelect.value)||1;
+    const [id,name,total]=info();
+    passage.replaceChildren();
+    status.textContent="Carregando capítulo...";
+    previous.disabled=n<=1;
+    next.disabled=n>=total;
+    try{
+      const url="https://www.sefaria.org/api/v3/texts/"+id+"."+n+"?version=portuguese&return_format=text_only";
+      const response=await fetch(url);
+      if(!response.ok) throw new Error("HTTP "+response.status);
+      const data=await response.json();
+      if(current!==requestNumber) return;
+      const v=(data.versions||[])[0];
+      const verses=v&&Array.isArray(v.text)?v.text:[];
+      if(!verses.length) throw new Error("não há versão em português deste capítulo");
+      passage.appendChild(el("h3",{textContent:name+" "+n}));
+      verses.forEach((t,i)=>{
+        if(!t) return;
+        const num=el("strong",{textContent:(i+1)+" "});
+        num.style.color="var(--gold)";
+        const line=el("p",{},num,el("span",{textContent:String(t)}));
+        line.style.margin="0 0 12px";
+        passage.appendChild(line);
+      });
+      status.textContent=(v.versionTitle?"Tradução: "+v.versionTitle+" · ":"")+verses.length+" versículos.";
+    }catch(error){
+      if(current!==requestNumber) return;
+      status.textContent="Não foi possível carregar este capítulo ("+error.message+"). Verifique a conexão e tente novamente.";
+      const link=el("a",{href:"https://www.sefaria.org/"+id+"."+n+"?lang=bi",target:"_blank",rel:"noopener",textContent:"Abrir este capítulo no Sefaria.org"});
+      link.style.color="var(--gold)";
+      passage.appendChild(link);
+      console.error("Erro ao carregar a Torá:",error);
+    }
+  }
+
+  bookSelect.addEventListener("change",()=>{fillChapters();loadChapter();});
+  chapterSelect.addEventListener("change",loadChapter);
+  previous.onclick=()=>{ if(Number(chapterSelect.value)>1){chapterSelect.value=String(Number(chapterSelect.value)-1);loadChapter();} };
+  next.onclick=()=>{ if(Number(chapterSelect.value)<info()[2]){chapterSelect.value=String(Number(chapterSelect.value)+1);loadChapter();} };
+
+  fillChapters();
+  window.scrollTo(0,0);
+  loadChapter();
 }
 
 /* ---------- Comparação ---------- */
